@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 
 # Create your models here.
 class Contohmodel(models.Model):
@@ -10,3 +11,4 @@ class Contohmodel(models.Model):
     def __str__(self):
         return self.nama
     pass
+
