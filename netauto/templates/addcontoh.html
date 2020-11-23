@@ -4,8 +4,13 @@ tmabah kan
 {% endblock title %}
 
 {% block content %}
-    <form action="" method="post">
-        {{ formk }}
-    </form>
+    <div class="container shadow  pt-4 pl-3 pb-3">
+        <h2>Tambahkan contoh</h2>
+        <hr>
+        <form action="" method="post" class="">
+            {{ formk.as_p }}
+            <input type="submit" value="simpan">
+        </form>
+    </div>
    
 {% endblock content %}

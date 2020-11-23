@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gaya.css' %}">
     
     <title>{% block title %}
     {% endblock title %}</title>
@@ -27,37 +28,37 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-</div>
+                             Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
 
-</nav>
+    </nav>
 <div class="row no-gutters">
     <div class="col-md-2 ">
         <ul class="nav flex-column pt-3 pb-3 shadow">
             <li class="nav-item">
-              <a class="nav-link active  ml-3" href="#"><i class="fas fa-user-cog mr-1"></i>Overview</a><hr>
+              <a class="nav-link active  ml-3" href="{% url 'show' %}"><i class="fas fa-user-cog mr-1"></i>Overview</a><hr>
             </li>
             <li class="nav-item">
-              <a class="nav-link ml-3 border" href="#"><h4>asikin aja</h4></a>
+              <a class="nav-link ml-1 mr-1 rounded border" href="{% url 'addcontoh' %}">tambah contoh</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link ml-3 " href="#">Link</a>
+              <a class="nav-link  ml-1 mr-1 border rounded" href="#">Link</a>
             </li>
             <li class="nav-item">
               <a class="nav-link ml-3 disabled text-white" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -66,8 +67,7 @@
 
     </div>
     <div class="col-md-10">
-        <div class="container mt-2">
-
+        <div class="container ">
             {% block content %}
             
             {% endblock content %}
