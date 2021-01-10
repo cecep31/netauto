@@ -1,9 +1,9 @@
 import paramiko
 import time
-
+import routeros_api
+import json
 
 def show_ip(ip_add,username,password):
-
 
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)
