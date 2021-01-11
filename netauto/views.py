@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Contohmodel, Routerm
-from .forms import Formcontoh
+from .forms import Formcontoh, RoutermForm
 from . import sendcom
 import json
 
@@ -29,4 +30,34 @@ def addcontoh(request):
         'k': contoh,
     }
     return render(request, 'addcontoh.html', context)
+    pass
+
+def addrouter(request):
+    router=Routerm.objects.all()
+    form = RoutermForm
+    context = {
+        'formk' : form,
+        'router': router
+    }
+    return render(request, "addrouter.html", context)
+    pass
+
+def addr(request):
+    if request.method == 'POST':
+        form = RoutermForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "berhasil bosku")
+            return redirect(addrouter)
+
+    pass
+
+def router(request, id):
+    router=Routerm.objects.all()
+    data=Routerm.objects.filter(pk=id)
+    context = {
+        'data' : data,
+        'router': router
+    }
+    return render(request,'detailrouter.html',context)
     pass
