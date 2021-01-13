@@ -1,13 +1,27 @@
 
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Router |{% for data in data %}{{data.nama}}{% endfor %} {% endblock title %} 
+{% block title %}Router | {% for data in data %}{{data.nama}}{% endfor %} {% endblock title %} 
+{% block judul %}
+Automations
+{% endblock judul %}
 {% block content %}
     
     {% for data in data %}
-    {{data.nama}}
+    {{data.nama}} |
     {{data.host}}
     {% endfor %}
+    <hr>
+
+
+    <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
 
 
 {% endblock content %} 
