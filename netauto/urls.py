@@ -1,4 +1,4 @@
-
+from django.contrib.auth.views import LoginView
 from django.urls import path
 from . import views
 
@@ -8,5 +8,7 @@ urlpatterns = [
     path('addrouter',views.addrouter, name='addrouter'),
     path('addr', views.addr, name='addr'),
     path('addc/', views.addcontoh, name='addcontoh'),
+    path('beta/',views.apiip, name='beta'),
+    path('login',LoginView.as_view(), name='login'),
     
 ]

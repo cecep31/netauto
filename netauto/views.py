@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import HttpResponse
 from .models import Contohmodel, Routerm
 from .forms import Formcontoh, RoutermForm
 from . import sendcom
 import json
+import routeros_api
 
 
 
@@ -61,3 +63,20 @@ def router(request, id):
     }
     return render(request,'detailrouter.html',context)
     pass
+
+def apiip(request):
+    host = "192.168.31.1"
+
+    conn = routeros_api.RouterOsApiPool(host, username="admin", password="", plaintext_login=True)
+    api= conn.get_api()
+
+    list_ip = api.get_resource('ip/address')
+    show_ip = list_ip.get()
+
+    data = json.dumps(show_ip, indent=3)
+    conn.disconnect()
+    d=json.loads(data)
+    context={
+        'data':d,
+    }
+    return render(request,'coba.html',context)
