@@ -6,22 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+       
+    </style>
     
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
+    <div class="container ">
+        <div class="row mx-auto">
+            <div class="col-md-4 mt-5">
                 <div class="card">
-                    <div class="card-header">
-                        LOGIN.
+                    <div class="card-header text-center">
+                        login
                     </div>
                     <div class="card-body">
-                        <form action="" method="post">
+                        <form method="POST">
                             {% csrf_token %}
                             {{form.as_p}}
+                            <input type="submit" name="" value="Login">
                         </form>
                     </div>
+                    
                 </div>
             </div>
         </div>

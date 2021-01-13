@@ -1,4 +1,4 @@
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView,LogoutView
 from django.urls import path
 from . import views
 
@@ -10,5 +10,6 @@ urlpatterns = [
     path('addc/', views.addcontoh, name='addcontoh'),
     path('beta/',views.apiip, name='beta'),
     path('login',LoginView.as_view(), name='login'),
+    path('logout',LogoutView.as_view(next_page='login'), name='logout'),
     
 ]

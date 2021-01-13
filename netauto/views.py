@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.http import HttpResponse
 from .models import Contohmodel, Routerm
 from .forms import Formcontoh, RoutermForm
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from . import sendcom
 import json
 import routeros_api
@@ -10,12 +12,14 @@ import routeros_api
 
 
 # Create your views here.
+@login_required(login_url=settings.LOGIN_URL) 
 def show_ip(request):
 
     data=sendcom.show_ip("192.168.31.1","admin","")
     return render(request, "home.html", { 'data': data })
     pass
 
+@login_required(login_url=settings.LOGIN_URL) 
 def homepage(request):
     router=Routerm.objects.all()
     context = {
@@ -24,6 +28,7 @@ def homepage(request):
     return render(request, "home.html", context)
     pass
 
+@login_required(login_url=settings.LOGIN_URL) 
 def addcontoh(request):
     contoh = Contohmodel.objects.all()
     fromcontoh = Formcontoh
@@ -34,6 +39,7 @@ def addcontoh(request):
     return render(request, 'addcontoh.html', context)
     pass
 
+@login_required(login_url=settings.LOGIN_URL) 
 def addrouter(request):
     router=Routerm.objects.all()
     form = RoutermForm
@@ -44,6 +50,7 @@ def addrouter(request):
     return render(request, "addrouter.html", context)
     pass
 
+@login_required(login_url=settings.LOGIN_URL) 
 def addr(request):
     if request.method == 'POST':
         form = RoutermForm(request.POST)
@@ -54,6 +61,7 @@ def addr(request):
 
     pass
 
+@login_required(login_url=settings.LOGIN_URL) 
 def router(request, id):
     router=Routerm.objects.all()
     data=Routerm.objects.filter(pk=id)
@@ -64,6 +72,7 @@ def router(request, id):
     return render(request,'detailrouter.html',context)
     pass
 
+@login_required(login_url=settings.LOGIN_URL) 
 def apiip(request):
     host = "192.168.31.1"
 
