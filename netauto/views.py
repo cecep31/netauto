@@ -64,10 +64,12 @@ def addr(request):
 @login_required(login_url=settings.LOGIN_URL) 
 def router(request, id):
     router=Routerm.objects.all()
+    idk=id
     data=Routerm.objects.filter(pk=id)
     context = {
         'data' : data,
-        'router': router
+        'router': router,
+        'idk':idk
     }
     return render(request,'detailrouter.html',context)
     pass
