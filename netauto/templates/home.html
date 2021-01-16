@@ -6,6 +6,10 @@
 Automations
 {% endblock judul %}
 {% block content %}
+ {% for router in router|slice:":1" %}
+    <h2 class="text-primary">Automation {{router.nama}}</h2>
+    <p>selahkan pilih pilihan outasi yang akan di gunakan:</p>
+ {% endfor %}
 
      <div class="card" style="width: 18rem;">
   <img src="..." class="card-img-top" alt="...">
