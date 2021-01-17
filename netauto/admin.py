@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contohmodel, Routerm
+from .models import Contohmodel, Routerm, Automation
 
 # Register your models here.
 class Contohadmin(admin.ModelAdmin):
@@ -7,6 +7,8 @@ class Contohadmin(admin.ModelAdmin):
     search_fields = ['nama']
     list_per_page = 4
 
-admin.site.register(Contohmodel, Contohadmin)
+admin.site.register(Contohmodel, Contohadmin )
 
 admin.site.register(Routerm)
+
+admin.site.register(Automation)

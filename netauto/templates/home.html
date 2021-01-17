@@ -10,14 +10,25 @@ Automations
     <h2 class="text-primary">Automation {{router.nama}}</h2>
     <p>selahkan pilih pilihan outasi yang akan di gunakan:</p>
  {% endfor %}
+ <div class="container">
+    <div class="row">
+{% for auto in auto %}
+   
 
-     <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-danger">{{auto.nama}}</h5>
+          <p class="card-text">{{auto.deskripsi}}.</p>
+          <a href="#" class="btn btn-primary rounded-pill">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+   
+
+    
+{% endfor %}
+    </div>
 </div>
 
 {% endblock content %} 

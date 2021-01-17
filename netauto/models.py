@@ -22,6 +22,15 @@ class Routerm(models.Model):
     def __str__(self):
         return self.nama
     pass
+
+class Automation(models.Model):
+    nama = models.CharField(max_length=50)
+    deskripsi = models.TextField()
+    
+    def __str__(self):
+        return self.nama
+    pass
+
 class Confrouter(models.Model):
     nama = models.CharField(max_length=50)
     deskripsi = models.CharField(max_length=50)

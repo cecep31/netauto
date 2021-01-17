@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import Contohmodel, Routerm
+from .models import Contohmodel, Routerm, Automation
 from .forms import Formcontoh, RoutermForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -21,8 +21,10 @@ def show_ip(request):
 
 @login_required(login_url=settings.LOGIN_URL) 
 def homepage(request):
+    auto = Automation.objects.all()
     router=Routerm.objects.all()
     context = {
+        'auto': auto,
         'router': router
     }
     return render(request, "home.html", context)
