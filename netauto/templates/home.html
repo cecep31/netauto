@@ -9,14 +9,10 @@ Automations
  {% for router in router|slice:":1" %}
     <h2 class="text-primary">Automation {{router.nama}}</h2>
     <p>selahkan pilih pilihan outasi yang akan di gunakan:</p>
- {% endfor %}
- <div class="container">
-    <div class="row">
-{% for auto in auto %}
-   
-
-    <div class="col-sm-6">
-      <div class="card">
+    <div class="row ">
+    {% for auto in auto %}
+    <div class="col-sm-6 ">
+      <div class="card shadow">
         <div class="card-body">
           <h5 class="card-title text-danger">{{auto.nama}}</h5>
           <p class="card-text">{{auto.deskripsi}}.</p>
@@ -24,12 +20,13 @@ Automations
         </div>
       </div>
     </div>
-   
+    {% endfor %}
+    </div>
+ {% endfor %}
+
 
     
-{% endfor %}
-    </div>
-</div>
+
 
 {% endblock content %} 
 
@@ -39,7 +36,7 @@ Automations
     {% for router in router %}
         <li class="nav-item">
         <a class="nav-link" href="{% url 'router' router.id %}">
-            <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">
+            <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">&nbsp;
             {{router.nama}}
         </a>
     </li>

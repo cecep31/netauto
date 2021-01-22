@@ -26,6 +26,7 @@ class Routerm(models.Model):
 class Automation(models.Model):
     nama = models.CharField(max_length=50)
     deskripsi = models.TextField()
+    status = models.CharField(max_length=15, blank=True)
     
     def __str__(self):
         return self.nama
