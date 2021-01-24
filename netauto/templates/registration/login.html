@@ -7,23 +7,30 @@
     <title>Login</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <style>
-       
+       body{
+           background-image: url({% static 'img/back.jpeg' %});
+           background-position: center;
+       }
     </style>
     
 </head>
 <body>
     <div class="container ">
-        <div class="row mx-auto">
-            <div class="col-md-4 mt-5">
-                <div class="card">
-                    <div class="card-header text-center">
-                        login
+        <div class="row align-items-center">
+            <div class="col-md-4 mt-5 ">
+                <div class="card shadow">
+                    <div class="card-header text-center bg-warning">
+                        Login
                     </div>
-                    <div class="card-body">
-                        <form method="POST">
-                            {% csrf_token %}
-                            {{form.as_p}}
-                            <input type="submit" name="" value="Login">
+                    <div class="card-body bg-primary ">
+                        <form class="" method="POST">
+                            <table>
+                                {% csrf_token %}
+                                {{form.as_p}}
+                            </table>
+                            <center>
+                            <input class="mt-1 text-center" type="submit" name="" value="Login">
+                            </center>
                         </form>
                     </div>
                     
