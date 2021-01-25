@@ -13,8 +13,9 @@ class RoutermForm(ModelForm):
         model = Routerm
         fields = '__all__'
         widgets = {
-            'nama' : forms.TextInput({'class':'form-control'}),
-            'host' : forms.TextInput({'class':'form-control'}),
-            'user' : forms.TextInput({'class':'form-control'}),
-            'password' : forms.TextInput({'class':'form-control'}),
+            'nama' : forms.TextInput({'class':'form-control','placeholder':'masukan nama untuk router'}),
+            'host' : forms.TextInput({'class':'form-control','placeholder':'alamat host router | contoh: 192.168.1.1'}),
+            'user' : forms.TextInput({'class':'form-control','placeholder':'masukan username router'}),
+            'password' : forms.TextInput({'class':'form-control','placeholder':'masukan pasword router'}),
+            'kecepatan_internet' : forms.TextInput({'class':'form-control','placeholder':'dalam kilobyte'}),
         }
