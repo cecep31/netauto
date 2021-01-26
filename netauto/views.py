@@ -93,3 +93,16 @@ def apiip(request):
         'data':d,
     }
     return render(request,'coba.html',context)
+
+@login_required(login_url=settings.LOGIN_URL) 
+def pcq1(request, id):
+    k=sendcom.sendpcq1(id)
+    if k == "":
+        d = "sukses"
+    else:
+        d="gagal"
+    context={
+        'data':d,
+    }
+    return redirect(show)
+    return render(request,'coba.html',context)

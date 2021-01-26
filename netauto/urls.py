@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('<int:id>/router',views.router, name='router'),
+    path('<int:id>/pcq1',views.pcq1, name='conpcq1'),
     path('', views.homepage, name='show'),
     path('addrouter',views.addrouter, name='addrouter'),
     path('addr', views.addr, name='addr'),

@@ -5,7 +5,9 @@
 {% block judul %}
 Automations
 {% endblock judul %}
+
 {% block content %}
+{{massage}}
  {% for router in router|slice:":1" %}
     <h2 class="text-primary">Automation {{router.nama}}</h2>
     <p>selahkan pilih pilihan outasi yang akan di gunakan:</p>
@@ -16,7 +18,7 @@ Automations
         <div class="card-body">
           <h5 class="card-title text-danger">{{auto.nama}}</h5>
           <p class="card-text">{{auto.deskripsi}}.</p>
-          <a href="#" class="btn btn-primary rounded-pill">Go somewhere</a>
+          <a href="{% url 'conpcq1' router.id %}" class="btn btn-primary rounded-pill">Go somewhere</a>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import paramiko
 import time
 import routeros_api
 import json
+from .models import Routerm
 
 def show_ip(ip_add,username,password):
 
@@ -29,4 +30,22 @@ def show_ipactive(parameter_list):
     data = json.dumps(show_ip, indent=3)
     conn.disconnect()
     return show_ip
+    pass
+
+def sendpcq1(id):
+    r=Routerm.objects.get(id=id)
+    host = r.host
+    username= r.user
+    password= r.password
+
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)
+    ssh.connect(hostname=host,username=username,password=password)
+
+    stdin, stdout, stderr = ssh.exec_command("ip address print")
+
+    time.sleep(1)
+
+    output= stdout.read().decode("ascii").strip("\n")
+    return output
     pass
