@@ -65,10 +65,12 @@ def addr(request):
 
 @login_required(login_url=settings.LOGIN_URL) 
 def router(request, id):
+    auto = Automation.objects.all()
     router=Routerm.objects.all()
     idk=id
     data=Routerm.objects.filter(pk=id)
     context = {
+        'auto': auto,
         'data' : data,
         'router': router,
         'idk':idk

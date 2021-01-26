@@ -11,20 +11,22 @@ Automations
     {{data.nama}} |
     {{data.host}} sebagai
     <strong> {{data.user}}</strong>
-   
+    <div class="row ">
+    {% for auto in auto %}
+    <div class="col-sm-6 ">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title text-danger">{{auto.nama}}</h5>
+          <p class="card-text">{{auto.deskripsi}}.</p>
+          <a href="{% url 'conpcq1' data.id %}" class="btn btn-primary rounded-pill">Go somewhere</a>
+        </div>
+      </div>
+    </div>
     {% endfor %}
-    <hr>
+    </div>
 
-
-    <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-
+    {% endfor %}
+  
 
 {% endblock content %} 
 {% block router %}
