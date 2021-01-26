@@ -56,7 +56,7 @@
       <div class="row">
         <nav
           id="sidebarMenu"
-          class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+          class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse fixed-top " style="margin-top: 41px;"
         >
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
@@ -86,7 +86,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="https://github.com/cecep31/netauto">
                   <span data-feather="layers"></span>
-                  <img src="{% static 'icons/file-person.svg' %}" alt="">&nbsp;
+                  <img src="{% static 'icons/file-person.svg' %}" alt="">&nbsp;&nbsp;
                  About
                 </a>
               </li>
@@ -141,10 +141,25 @@
               >
                 <span data-feather="calendar"></span>
                 This week
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
               </button>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown button
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
             </div>
           </div>
-
+        
           <!-- {% comment %} <canvas
             class="my-4 w-100"
             id="myChart"
@@ -162,12 +177,12 @@
     </div>
     <p></p>
     <p></p>
-    <hr>
-    <footer class="blog-footer text-center pb-1">
-      <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> <br>by <a href="https://twitter.com/mdo">@mdo</a>. <a href="#">Back to top</a></p>
-     
-    </footer>
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+    <script src="{% static 'js/bm.js' %}"></script>
+    <script src="{% static 'js/bb.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>    
+
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"

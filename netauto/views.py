@@ -102,7 +102,7 @@ def pcq1(request, id):
     else:
         d="gagal"
     context={
-        'data':d,
+        'data':k,
     }
-    return redirect(show)
+    
     return render(request,'coba.html',context)

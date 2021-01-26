@@ -42,10 +42,11 @@ def sendpcq1(id):
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)
     ssh.connect(hostname=host,username=username,password=password)
 
-    stdin, stdout, stderr = ssh.exec_command("ip address print")
+    stdin, stdout, stderr = ssh.exec_command("ls \n ip address print")
 
     time.sleep(1)
 
     output= stdout.read().decode("ascii").strip("\n")
+    
     return output
     pass
