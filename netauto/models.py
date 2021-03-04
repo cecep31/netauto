@@ -41,3 +41,13 @@ class Confrouter(models.Model):
     def __str__(self):
         return self.nama
     pass
+
+class Manualcommand(models.Model):
+    host = models.ForeignKey(Routerm, on_delete=models.CASCADE)
+    command = models.CharField(max_length=255)
+    output = models.TextField(blank=True)
+    time = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.time
+    pass

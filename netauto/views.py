@@ -108,3 +108,13 @@ def pcq1(request, id):
     }
     
     return render(request,'coba.html',context)
+
+@login_required(login_url=settings.LOGIN_URL) 
+def manualcommand(request):
+    from .forms import Manualform
+    f=Manualform
+    context={
+        'form':f,
+    }
+    
+    return render(request,'manualc.html',context)

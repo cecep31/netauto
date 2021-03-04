@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Contohmodel, Routerm
+from .models import Contohmodel, Routerm,Manualcommand
 from django import forms
 
 class Formcontoh(ModelForm):
@@ -7,6 +7,7 @@ class Formcontoh(ModelForm):
     class Meta:
         model = Contohmodel
         fields = '__all__'
+
 class RoutermForm(ModelForm):
     
     class Meta:
@@ -19,3 +20,9 @@ class RoutermForm(ModelForm):
             'password' : forms.TextInput({'class':'form-control','placeholder':'masukan pasword router'}),
             'kecepatan_internet' : forms.TextInput({'class':'form-control','placeholder':'dalam kilobyte'}),
         }
+
+class Manualform(ModelForm):
+    
+    class Meta:
+        model = Manualcommand
+        fields = ['host', 'command']
