@@ -26,3 +26,6 @@ class Manualform(ModelForm):
     class Meta:
         model = Manualcommand
         fields = ['host', 'command']
+        widgets = {
+            'host' : forms.Select({'class':'form-control'})
+        }
