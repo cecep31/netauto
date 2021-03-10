@@ -28,7 +28,7 @@ def homepage(request):
         'router': router
     }
     return render(request, "home.html", context)
-    pass
+    
 
 @login_required(login_url=settings.LOGIN_URL) 
 def addcontoh(request):
@@ -39,7 +39,7 @@ def addcontoh(request):
         'k': contoh,
     }
     return render(request, 'addcontoh.html', context)
-    pass
+ 
 
 @login_required(login_url=settings.LOGIN_URL) 
 def addrouter(request):
@@ -50,7 +50,7 @@ def addrouter(request):
         'router': router
     }
     return render(request, "addrouter.html", context)
-    pass
+    
 
 @login_required(login_url=settings.LOGIN_URL) 
 def addr(request):
@@ -76,7 +76,7 @@ def router(request, id):
         'idk':idk
     }
     return render(request,'detailrouter.html',context)
-    pass
+    
 
 @login_required(login_url=settings.LOGIN_URL) 
 def apiip(request):
