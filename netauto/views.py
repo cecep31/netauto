@@ -25,7 +25,8 @@ def homepage(request):
     router=Routerm.objects.all()
     context = {
         'auto': auto,
-        'router': router
+        'router': router,
+        'count' : 0
     }
     return render(request, "home.html", context)
     
