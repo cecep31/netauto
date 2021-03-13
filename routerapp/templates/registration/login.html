@@ -11,7 +11,7 @@
     <style>
       body {
         background-image: url({% static "img/back.jpeg" %});
-        background-position: center;
+        background-size: auto;
       }
     </style>
   </head>
@@ -34,7 +34,7 @@
             {% endif %}
         {% endif %}
         <center>
-            <h2 style={text-color=yellow;}>Login<h2>
+            <h2 style="color:yellow;">Login<h2>
             </center>
           <form method="post", {% url 'login' %}>
           {% csrf_token %}
