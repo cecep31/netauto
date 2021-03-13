@@ -1,0 +1,49 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} home {% endblock title %} 
+{% block judul %}
+Automations
+{% endblock judul %}
+
+{% block content %}
+{{massage}}
+ {% for router in router|slice:":1" %}
+    <h2 class="text-primary">Automation {{router.nama}}</h2>
+    <p>selahkan pilih pilihan outasi yang akan di gunakan:</p>
+    <div class="row ">
+    {% for auto in auto %}
+    <div class="col-sm-6 ">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title text-danger">{{auto.nama}}</h5>
+          <p class="card-text">{{auto.deskripsi}}.</p>
+          <a href="{% url 'conpcq1' router.id %}" class="btn btn-primary rounded-pill">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+ {% endfor %}
+
+
+    
+
+
+{% endblock content %} 
+
+{% block router %}
+  
+    {% for router in router %}
+        <li class="nav-item">
+        
+        <a class="nav-link {% if router.id == "s" %}shadow text-white bg-info{% endif %}" href="{% url 'router' router.id %}">
+            <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">&nbsp;
+            {{router.nama}}
+        </a>
+      
+    </li>
+  
+    {% endfor %}
+    
+{% endblock router %}

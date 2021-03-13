@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} home {% endblock title %} 
+{% block content %}
+    {{massage}}
+    <form action="{% url 'addr' %}" method="post">
+        {% csrf_token %}
+        {{formk.as_p}}
+        <input type="submit" value="tambah Router">
+    </form> 
+
+
+{% endblock content %} 
+{% block router %}
+
+   {% for router in router %}
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'router' router.id %}">
+            <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">
+            {{router.nama}}
+        </a>
+    </li>
+    {% endfor %}
+    
+{% endblock router %}
