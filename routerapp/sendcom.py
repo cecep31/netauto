@@ -4,6 +4,11 @@ import routeros_api
 import json
 from .models import Routerm
 
+class Send:
+    pass
+
+
+
 def show_ip(ip_add,username,password):
 
     ssh = paramiko.SSHClient()
