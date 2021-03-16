@@ -4,8 +4,23 @@ import routeros_api
 import json
 from .models import Routerm
 
-class Send:
-    pass
+class Remote:
+    def __init__(self,host, user, passw):
+        self.host = host
+        self.user = user
+        self.passw =passw
+    
+    def connectssh(self):
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)
+        ssh.connect(hostname=self.host,username=self.user,password=self.passw)
+        return ssh
+
+    def pcq(self):
+        stdin, stout, sterr = self.connectssh().exec_command("ip addres print")
+        if sterr:
+            return sterr
+        return stout
 
 
 
@@ -20,7 +35,7 @@ def show_ip(ip_add,username,password):
     time.sleep(1)
 
     output=stdout.read().decode("ascii").strip("\n")
-    return output
+    return output, stderr
     pass
 
 def show_ipactive(parameter_list):

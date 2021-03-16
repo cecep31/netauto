@@ -99,13 +99,20 @@ def apiip(request):
 
 @login_required(login_url=settings.LOGIN_URL) 
 def pcq1(request, id):
-    k=sendcom.sendpcq1(id)
-    if k == "":
-        d = "sukses"
-    else:
-        d="gagal"
+    
+    for i in Routerm.objects.filter(id=id):
+        user=i.nama
+        passw=i.password
+        host=i.host
+        speed=i.kecepatan_internet
+        
+
+    # send = sendcom.Remote("localhost","pilput","sd")
+    # send.pcq()
+
+   
     context={
-        'data':k,
+        'data':host,
     }
     
     return render(request,'coba.html',context)
