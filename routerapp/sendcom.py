@@ -5,22 +5,26 @@ import json
 from .models import Routerm
 
 class Remote:
-    def __init__(self,host, user, passw):
+    def __init__(self,host, user, passw,speed):
         self.host = host
         self.user = user
         self.passw =passw
+        self.speed=speed
     
     def connectssh(self):
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy)
         ssh.connect(hostname=self.host,username=self.user,password=self.passw)
+
+
+
         return ssh
 
     def pcq(self):
-        stdin, stout, sterr = self.connectssh().exec_command("ip addres print")
-        if sterr:
-            return sterr
-        return stout
+        stdin, stdout, stderr = self.connectssh().exec_command("ip address print \n")
+        time.sleep(1)
+        
+        return stdout
 
 
 

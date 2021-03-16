@@ -107,12 +107,12 @@ def pcq1(request, id):
         speed=i.kecepatan_internet
         
 
-    # send = sendcom.Remote("localhost","pilput","sd")
-    # send.pcq()
+    send = sendcom.Remote("192.168.31.31","admin","",200)
+    v=send.pcq().readlines
 
    
     context={
-        'data':host,
+        'data':v,
     }
     
     return render(request,'coba.html',context)
