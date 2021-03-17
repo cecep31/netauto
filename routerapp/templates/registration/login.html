@@ -18,7 +18,7 @@
   <body>
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-md-4 mt-5 bg-white shadow p-5">
+        <div class="col-md-4 mt-5 shadow p-5 rounded" style="background-color: yellow;">
         {% if form.errors %}
         <center>
         <p class="text-danger">username atau password yang di masukan salah</p>
@@ -34,9 +34,9 @@
             {% endif %}
         {% endif %}
         <center>
-            <h2 style="color:yellow;">Login<h2>
+            <h2>Login<h2>
             </center>
-          <form method="post", {% url 'login' %}>
+          <form method="post", {% url 'login' %} >
           {% csrf_token %}
           
             <div class="mb-3">

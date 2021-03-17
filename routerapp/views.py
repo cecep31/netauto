@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
+from paramiko.ssh_exception import NoValidConnectionsError
 from .models import Contohmodel, Routerm, Automation
 from .forms import Formcontoh, RoutermForm
 from django.contrib.auth.decorators import login_required
@@ -8,6 +9,8 @@ from django.conf import settings
 from . import sendcom
 import json
 import routeros_api
+import paramiko
+from . import urls
 
 
 
@@ -101,14 +104,23 @@ def apiip(request):
 def pcq1(request, id):
     
     for i in Routerm.objects.filter(id=id):
-        user=i.nama
+        user=i.user
         passw=i.password
         host=i.host
         speed=i.kecepatan_internet
         
-
-    send = sendcom.Remote("192.168.31.31","admin","",200)
-    v=send.pcq().readlines
+    try:
+       sendcom.Remote(host,user,passw,speed)
+       send = sendcom.Remote(host,user,passw,speed)
+       v=send.pcq().readlines
+    except paramiko.AuthenticationException:
+        return redirect("google.com")
+    except paramiko.BadHostKeyException:
+        return redirect("google.com")
+    except NoValidConnectionsError:
+        return redirect(homepage)
+    
+  
 
    
     context={
