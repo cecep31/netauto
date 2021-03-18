@@ -112,19 +112,18 @@ def pcq1(request, id):
         host = i.host
         speed = i.kecepatan_internet
 
-    # try:
-    #     sendcom.Remote(host, user, passw, speed)
-    #     send = sendcom.Remote(host, user, passw, speed)
-    #     v = send.pcq().readlines
-    # except paramiko.AuthenticationException:
-    #     return redirect(homepage)
-    # except paramiko.BadHostKeyException:
-    #     return redirect(homepage)
-    # except NoValidConnectionsError:
-    #     return redirect(homepage)
+    try:
+        send = sendcom.Remote(host, user, passw, speed)
+        v = send.pcq().readlines
+    except paramiko.AuthenticationException:
+        return redirect(homepage)
+    except paramiko.BadHostKeyException:
+        return redirect(homepage)
+    except NoValidConnectionsError:
+        return redirect(homepage)
 
-    send = sendcom.Remote(host, user, passw, speed)
-    v=send.scanip()
+    # send = sendcom.Remote(host, user, passw, speed)
+    # v=send.scanip()
     
     context = {
         'data': v,
