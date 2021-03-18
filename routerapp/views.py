@@ -121,6 +121,8 @@ def pcq1(request, id):
         return redirect(homepage)
     except NoValidConnectionsError:
         return redirect(homepage)
+    except TimeoutError:
+        return redirect(homepage)
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
