@@ -1,3 +1,4 @@
+import ipaddress
 import paramiko
 import time
 import routeros_api
@@ -22,13 +23,16 @@ class Remote:
 
     def scanip(self):
         import networkscan
-
-        check = "192.168.1.0/24"
-        myscan = networkscan.Networkscan(check)
-        myscan.run()
-        data = myscan.list_of_hosts_found
+        network = self.host+"/24"
+        net=ipaddress.ip_network(network, strict=False)
         
-        return data
+
+        myscan = networkscan.Networkscan(net)
+        myscan.run()
+        j=0
+        for i in myscan.list_of_hosts_found:
+            j +=1
+        return j
 
     def pcq(self):
         stdin, stdout, stderr = self.connectssh().exec_command("ip address print \n")
