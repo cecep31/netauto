@@ -34,10 +34,13 @@ class Remote:
 
     def pcq(self):
         j,net = self.scanip()
-        #stdin, stdout, stderr = self.connectssh().exec_command("queue tree add parent=global queue=PCQ_download packet-mark=client_download \n queue tree add parent=global queue=PCQ_upload packet-mark=client_upload \n queue simple add target-addresses=3131network queue=PCQ_upload/PCQ_download".replace("3131network",str(net)))
-        stdin, stdout, stderr = self.connectssh().exec_command("ip address print \n interface print ")
-        time.sleep(1)
+        stdin, stdout, stderr = self.connectssh().exec_command("queue simple add target=3131network name=pcq1 queue=pcq-upload-default/pcq-download-default".replace("3131network","ether2"))
+        # stdin, stdout, stderr = self.connectssh().exec_command("ip address print \n interface print ")
 
+        time.sleep(1)
+        if "already" in stdout:
+            return "udah ada"
+        out=stdout.readline
         return stdout
 
 

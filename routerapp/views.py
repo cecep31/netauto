@@ -114,7 +114,7 @@ def pcq1(request, id):
 
     try:
         send = sendcom.Remote(host, user, passw, speed)
-        v = send.pcq().readlines
+        v = send.pcq()
     except paramiko.AuthenticationException:
         return redirect(homepage)
     except paramiko.BadHostKeyException:
