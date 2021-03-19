@@ -116,13 +116,13 @@ def pcq1(request, id):
         send = sendcom.Remote(host, user, passw, speed)
         v = send.pcq()
     except paramiko.AuthenticationException:
-        return redirect(homepage)
+        v="gagal untuk login pastikan username dan password benar"
     except paramiko.BadHostKeyException:
-        return redirect(homepage)
+        v="proses gagal roueter tidak terhubung"
     except NoValidConnectionsError:
-        return redirect(homepage)
+        v="proses gagal roueter tidak terhubung"
     except TimeoutError:
-        return redirect(homepage)
+        v="proses gagal karena router tidak menangapi"
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
@@ -132,6 +132,7 @@ def pcq1(request, id):
     }
 
     return render(request, 'coba.html', context)
+
 
 
 
