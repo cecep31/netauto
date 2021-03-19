@@ -12,7 +12,6 @@ import routeros_api
 import paramiko
 
 
-
 # Create your views here.
 @login_required(login_url=settings.LOGIN_URL)
 def show_ip(request):
@@ -65,8 +64,6 @@ def addr(request):
             messages.success(request, "berhasil bosku")
             return redirect(addrouter)
 
-    pass
-
 
 @login_required(login_url=settings.LOGIN_URL)
 def router(request, id):
@@ -116,24 +113,22 @@ def pcq1(request, id):
         send = sendcom.Remote(host, user, passw, speed)
         v = send.pcq()
     except paramiko.AuthenticationException:
-        v="gagal untuk login pastikan username dan password benar"
+        v = "gagal untuk login pastikan username dan password benar"
     except paramiko.BadHostKeyException:
-        v="proses gagal roueter tidak terhubung"
+        v = "proses gagal roueter tidak terhubung"
     except NoValidConnectionsError:
-        v="proses gagal roueter tidak terhubung"
+        v = "proses gagal roueter tidak terhubung"
     except TimeoutError:
-        v="proses gagal karena router tidak menangapi"
+        v = "proses gagal karena router tidak menangapi"
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
-    
+
     context = {
         'data': v,
     }
 
     return render(request, 'coba.html', context)
-
-
 
 
 @login_required(login_url=settings.LOGIN_URL)
