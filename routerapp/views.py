@@ -109,17 +109,10 @@ def pcq1(request, id):
         host = i.host
         speed = i.kecepatan_internet
 
-    try:
-        send = sendcom.Remote(host, user, passw, speed)
-        v = send.pcq()
-    except paramiko.AuthenticationException:
-        v = "gagal untuk login pastikan username dan password benar"
-    except paramiko.BadHostKeyException:
-        v = "proses gagal roueter tidak terhubung"
-    except NoValidConnectionsError:
-        v = "proses gagal roueter tidak terhubung"
-    except TimeoutError:
-        v = "proses gagal karena router tidak menangapi"
+    
+    send = sendcom.Remote(host, user, passw, speed)
+    v = send.pcq()
+    
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()

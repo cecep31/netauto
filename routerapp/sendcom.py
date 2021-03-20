@@ -4,7 +4,7 @@ import time
 import routeros_api
 import json
 from .models import Routerm
-
+from paramiko.ssh_exception import NoValidConnectionsError
 
 class Remote:
     def __init__(self, host, user, passw, speed):
@@ -33,15 +33,28 @@ class Remote:
         return j, net
 
     def pcq(self):
-        j,net = self.scanip()
-        stdin, stdout, stderr = self.connectssh().exec_command("queue simple add target=3131network name=pcq1 queue=pcq-upload-default/pcq-download-default".replace("3131network","ether2"))
+        j, net = self.scanip()
+        
         # stdin, stdout, stderr = self.connectssh().exec_command("ip address print \n interface print ")
 
-        time.sleep(1)
-        if "already" in stdout:
-            return "udah ada"
-        out=stdout.readline
-        return stdout
+       
+        try:
+            stdin, stdout, stderr = self.connectssh().exec_command(
+            "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
+            time.sleep(1)
+        except paramiko.AuthenticationException:
+            return "gagal untuk login pastikan username dan password benar"
+        except paramiko.BadHostKeyException:
+            return "proses gagal roueter tidak terhubung"
+        except NoValidConnectionsError:
+            return "proses gagal roueter tidak terhubung"
+        except TimeoutError:
+            return "proses gagal karena router tidak menangapi"
+
+        if "already" in stdout.read().decode("ascii"):
+            return "Sudah Di Set sebelumnya"
+        else:
+            return "berhasil di aktifkan"
 
 
 def show_ip(ip_add, username, password):
