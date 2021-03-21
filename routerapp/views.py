@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
-from paramiko.ssh_exception import NoValidConnectionsError
 from .models import Contohmodel, Routerm, Automation
 from .forms import Formcontoh, RoutermForm
 from django.contrib.auth.decorators import login_required
@@ -9,7 +8,7 @@ from django.conf import settings
 from . import sendcom
 import json
 import routeros_api
-import paramiko
+
 
 
 # Create your views here.
@@ -18,7 +17,7 @@ def show_ip(request):
 
     data = sendcom.show_ip("192.168.31.1", "admin", "")
     return render(request, "home.html", {'data': data})
-    pass
+    
 
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -128,6 +127,7 @@ def pcq1(request, id):
 def manualcommand(request):
     from .forms import Manualform
     f = Manualform
+    
     context = {
         'form': f,
     }

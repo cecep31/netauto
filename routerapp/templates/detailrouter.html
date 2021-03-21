@@ -14,10 +14,10 @@ Automations
     <div class="row ">
     {% for auto in auto %}
     <div class="col-sm-6 ">
-      <div class="card mt-5">
+      <div class="card mt-5 shadow">
         <div class="card-body">
           <h5 class="card-title text-danger">{{auto.nama}}</h5>
-          <p class="card-text">{{auto.deskripsi|safe|truncatewords:"10"}}.</p>
+          <p class="card-text">{{auto.deskripsi|truncatewords:"10"}}.</p>
           <a href="{% url 'conpcq1' data.id %}" class="btn btn-primary rounded-pill">Go somewhere</a>
         </div>
       </div>

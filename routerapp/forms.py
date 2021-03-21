@@ -30,5 +30,6 @@ class Manualform(ModelForm):
         model = Manualcommand
         fields = ['host', 'command']
         widgets = {
-            'host': forms.Select({'class': 'form-control'})
+            'host': forms.Select({'class': 'form-control'}),
+            'command': forms.TextInput({'class': 'form-control'})
         }
