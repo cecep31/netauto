@@ -7,7 +7,14 @@ Automations
 {% endblock judul %}
 
 {% block content %}
-{{massage}}
+    {% if messages %}
+       
+        {% for message in messages %}
+        <div class="alert alert-dark" role="alert">
+          <strong> {{ message }}</strong>
+        </div>
+        {% endfor %}
+    {% endif %}
  {% for router in router|slice:":1" %}
     <h2 class="text-primary">Router: {{router.nama}}</h2>
     <p>silahkan pilih outamasi yang akan di gunakan untuk bandwidth:</p>

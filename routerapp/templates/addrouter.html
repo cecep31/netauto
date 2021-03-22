@@ -5,11 +5,11 @@
 {% block content %}
     
     {% if messages %}
-        <ul class="messages">
         {% for message in messages %}
-            {{ message }}
+        <div class="alert alert-dark" role="alert">
+          <strong> {{ message }}</strong>
+        </div>
         {% endfor %}
-    </ul>
     {% endif %}
 
     <form action="{% url 'addrouter' %}" method="post">

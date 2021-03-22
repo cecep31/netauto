@@ -11,14 +11,12 @@ import routeros_api
 from django.urls import reverse
 
 
-
 # Create your views here.
 @login_required(login_url=settings.LOGIN_URL)
 def show_ip(request):
 
     data = sendcom.show_ip("192.168.31.1", "admin", "")
     return render(request, "home.html", {'data': data})
-    
 
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -50,8 +48,9 @@ def addrouter(request):
         form = RoutermForm(request.POST)
         if form.is_valid():
             form.save()
-           
-            messages.success(request, "berhasil menambahkan "+ form['nama'].value() )
+
+            messages.success(
+                request, "berhasil menambahkan " + form['nama'].value())
             return HttpResponseRedirect(reverse("addrouter"))
     else:
         router = Routerm.objects.all()
@@ -116,19 +115,15 @@ def pcq1(request, id):
         passw = i.password
         host = i.host
         speed = i.kecepatan_internet
-    
+
     send = sendcom.Remote(host, user, passw, speed)
     v = send.pcq()
-    
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
+    messages.success(request, v)
+    return HttpResponseRedirect(reverse('show'))
 
-    context = {
-        'data': v,
-    }
-
-    return render(request, 'coba.html', context)
 
 @login_required(login_url=settings.LOGIN_URL)
 def pcq2(request, id):
@@ -140,10 +135,9 @@ def pcq2(request, id):
         speed = i.kecepatan_internet
 
     HttpResponseRedirect(reverse())
-    
+
     send = sendcom.Remote(host, user, passw, speed)
     v = send.pcq()
-    
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
@@ -153,6 +147,7 @@ def pcq2(request, id):
     }
 
     return render(request, 'pcq2.html', context)
+
 
 @login_required(login_url=settings.LOGIN_URL)
 def manualcommand(request):
