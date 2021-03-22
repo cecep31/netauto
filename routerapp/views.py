@@ -46,13 +46,21 @@ def addcontoh(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def addrouter(request):
-    router = Routerm.objects.all()
-    form = RoutermForm
-    context = {
-        'formk': form,
-        'router': router
-    }
-    return render(request, "addrouter.html", context)
+    if request.method == 'POST':
+        form = RoutermForm(request.POST)
+        if form.is_valid():
+            form.save()
+           
+            messages.success(request, "berhasil menambahkan "+ form['nama'].value() )
+            return HttpResponseRedirect(reverse("addrouter"))
+    else:
+        router = Routerm.objects.all()
+        form = RoutermForm
+        context = {
+            'formk': form,
+            'router': router
+        }
+        return render(request, "addrouter.html", context)
 
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -108,8 +116,6 @@ def pcq1(request, id):
         passw = i.password
         host = i.host
         speed = i.kecepatan_internet
-
-    HttpResponseRedirect(reverse())
     
     send = sendcom.Remote(host, user, passw, speed)
     v = send.pcq()
@@ -146,7 +152,7 @@ def pcq2(request, id):
         'data': v,
     }
 
-    return render(request, 'coba.html', context)
+    return render(request, 'pcq2.html', context)
 
 @login_required(login_url=settings.LOGIN_URL)
 def manualcommand(request):

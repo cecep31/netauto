@@ -3,8 +3,16 @@
 {% load static %}
 {% block title %} home {% endblock title %} 
 {% block content %}
-    {{massage}}
-    <form action="{% url 'addr' %}" method="post">
+    
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form action="{% url 'addrouter' %}" method="post">
         {% csrf_token %}
         {{formk.as_p}}
         <input type="submit" value="tambah Router">
