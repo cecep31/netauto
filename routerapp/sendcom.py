@@ -43,18 +43,18 @@ class Remote:
             "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
             time.sleep(1)
         except paramiko.AuthenticationException:
-            return "gagal untuk login pastikan username dan password benar"
+            return "Gagal untuk login pastikan username dan password benar"
         except paramiko.BadHostKeyException:
-            return "proses gagal roueter tidak terhubung"
+            return "Proses gagal roueter tidak terhubung"
         except NoValidConnectionsError:
-            return "proses gagal roueter tidak terhubung"
+            return "Proses gagal roueter tidak terhubung"
         except TimeoutError:
-            return "proses gagal karena router tidak menangapi"
+            return "Proses gagal karena router tidak menangapi"
 
         if "already" in stdout.read().decode("ascii"):
             return "Sudah Di Set sebelumnya"
         else:
-            return "berhasil di aktifkan"
+            return "Berhasil di aktifkan"
 
 
 def show_ip(ip_add, username, password):
