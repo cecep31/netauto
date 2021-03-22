@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Contohmodel, Routerm, Automation
 from .forms import Formcontoh, RoutermForm
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,7 @@ from django.conf import settings
 from . import sendcom
 import json
 import routeros_api
+from django.urls import reverse
 
 
 
@@ -108,6 +109,7 @@ def pcq1(request, id):
         host = i.host
         speed = i.kecepatan_internet
 
+    HttpResponseRedirect(reverse())
     
     send = sendcom.Remote(host, user, passw, speed)
     v = send.pcq()
@@ -122,12 +124,35 @@ def pcq1(request, id):
 
     return render(request, 'coba.html', context)
 
+@login_required(login_url=settings.LOGIN_URL)
+def pcq2(request, id):
+
+    for i in Routerm.objects.filter(id=id):
+        user = i.user
+        passw = i.password
+        host = i.host
+        speed = i.kecepatan_internet
+
+    HttpResponseRedirect(reverse())
+    
+    send = sendcom.Remote(host, user, passw, speed)
+    v = send.pcq()
+    
+
+    # send = sendcom.Remote(host, user, passw, speed)
+    # v=send.scanip()
+
+    context = {
+        'data': v,
+    }
+
+    return render(request, 'coba.html', context)
 
 @login_required(login_url=settings.LOGIN_URL)
 def manualcommand(request):
     from .forms import Manualform
     f = Manualform
-    
+
     context = {
         'form': f,
     }
