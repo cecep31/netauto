@@ -105,4 +105,3 @@ def sendpcq1(id):
     output = stdout.read().decode("ascii").strip("\n")
 
     return output
-    pass
