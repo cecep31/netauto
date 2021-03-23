@@ -11,18 +11,28 @@ Automations
     {{data.nama}} |
     {{data.host}} sebagai
     <strong> {{data.user}}</strong>
-    <div class="row ">
-    {% for auto in auto %}
+    <div class="row mt-4">
+   
     <div class="col-sm-6 ">
-      <div class="card mt-5 shadow">
+      <div class="card shadow">
         <div class="card-body">
-          <h5 class="card-title text-danger">{{auto.nama}}</h5>
-          <p class="card-text">{{auto.deskripsi|truncatewords:"10"}}.</p>
+          <h5 class="card-title text-danger">Simple Bandwidth</h5>
+          <p class="card-text">jjjsjjsjnd hjjjs sjjjdjjdbajjnndnnndllfl.</p>
           <a href="{% url 'conpcq1' data.id %}" class="btn btn-primary rounded-pill">Go somewhere</a>
         </div>
       </div>
     </div>
-    {% endfor %}
+
+    <div class="col-sm-6 ">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title text-danger">Simple dan Akurat</h5>
+          <p class="card-text">jjjsjjsjnd hjjjs sjjjdjjdbajjnndnnndllfl.</p>
+          <a href="{% url 'autosetting1' data.id %}" class="btn btn-primary rounded-pill">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+ 
     </div>
 
     {% endfor %}

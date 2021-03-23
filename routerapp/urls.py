@@ -9,11 +9,9 @@ urlpatterns = [
     path('<int:id>/pcq1',views.pcq1, name='conpcq1'),
     path('', views.homepage, name='show'),
     path('addrouter',views.addrouter, name='addrouter'),
-    path('addr', views.addr, name='addr'),
-    path('addc/', views.addcontoh, name='addcontoh'),
     path('beta/',views.apiip, name='beta'),
     path('login',LoginView.as_view(), name='login'),
     path('logout',LogoutView.as_view(next_page='login'), name='logout'),
-    path('auto/:router/:id',views.pcq2, name='pcq2'),
+    path('auto/<int:router>/<int:id>',views.autosettingview, name='autosetting1'),
     
 ]
