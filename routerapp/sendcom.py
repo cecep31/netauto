@@ -32,7 +32,7 @@ class Remote:
             j += 1
         return j, net
 
-    def pcq(self):
+    def pcq1(self):
         j, net = self.scanip()
         
         # stdin, stdout, stderr = self.connectssh().exec_command("ip address print \n interface print ")

@@ -116,7 +116,7 @@ def pcq1(request, id):
         speed = i.kecepatan_internet
 
     send = sendcom.Remote(host, user, passw, speed)
-    v = send.pcq()
+    v = send.pcq1()
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
