@@ -36,8 +36,6 @@ class Remote:
         j, net = self.scanip()
         
         # stdin, stdout, stderr = self.connectssh().exec_command("ip address print \n interface print ")
-
-       
         try:
             stdin, stdout, stderr = self.connectssh().exec_command(
             "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
