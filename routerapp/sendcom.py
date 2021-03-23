@@ -6,6 +6,7 @@ import json
 from .models import Routerm
 from paramiko.ssh_exception import NoValidConnectionsError
 
+
 class Remote:
     def __init__(self, host, user, passw, speed):
         self.host = host
