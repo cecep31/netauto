@@ -147,8 +147,9 @@ def pcq2(request, id):
 
     return render(request, 'pcq2.html', context)
 
+
 @login_required(login_url=settings.LOGIN_URL)
-def autosettingview(request, router, id):
+def autosettingview1(request, router, id):
     from .forms import Manualform
     f = Manualform
 

@@ -51,3 +51,11 @@ class Manualcommand(models.Model):
     def __str__(self):
         return self.time
 
+class Automationon(models.Model):
+    auto = models.ForeignKey(Automation, on_delete=models.CASCADE)
+    status = models.IntegerField()
+
+    def __str__(self):
+        return self.auto
+
+  

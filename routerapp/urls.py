@@ -12,6 +12,6 @@ urlpatterns = [
     path('beta/',views.apiip, name='beta'),
     path('login',LoginView.as_view(), name='login'),
     path('logout',LogoutView.as_view(next_page='login'), name='logout'),
-    path('auto/<int:router>/<int:id>',views.autosettingview, name='autosetting1'),
+    path('auto/<int:router>/<int:id>',views.autosettingview1, name='autosetting1'),
     
 ]
