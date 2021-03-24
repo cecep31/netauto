@@ -53,9 +53,8 @@ class Manualcommand(models.Model):
 
 class Automationon(models.Model):
     auto = models.ForeignKey(Automation, on_delete=models.CASCADE)
-    status = models.IntegerField()
-
-    def __str__(self):
-        return self.auto
+    router = models.ForeignKey(Routerm, on_delete=models.CASCADE)
+    create_at = models.DateTimeField(auto_now=True)
+    
 
   
