@@ -56,11 +56,11 @@ def addrouter(request):
                 request, "berhasil menambahkan " + form['nama'].value())
             return HttpResponseRedirect(reverse("addrouter"))
     else:
-        router = Routerm.objects.all()
+        routerside = Routerm.objects.all()
         form = RoutermForm
         context = {
             'formk': form,
-            'router': router
+            'routerside': routerside
         }
         return render(request, "addrouter.html", context)
 

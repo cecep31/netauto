@@ -20,17 +20,16 @@
         <input type="submit" value="tambah Router">
     </form> 
 
-
 {% endblock content %} 
-{% block router %}
+{% block routerside %}
 
-   {% for router in router %}
+   {% for routerside in routerside %}
         <li class="nav-item">
-        <a class="nav-link" href="{% url 'router' router.id %}">
-            <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">
-            {{router.nama}}
+        <a class="nav-link" href="{% url 'router' routerside.id %}">
+            <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">&nbsp;
+            {{routerside.nama}}
         </a>
     </li>
     {% endfor %}
     
-{% endblock router %}
+{% endblock routerside %}
