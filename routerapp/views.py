@@ -21,11 +21,13 @@ def show_ip(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def homepage(request):
-    auto = Automation.objects.all()
-    router = Routerm.objects.all()
+    auto1 = Automation.objects.filter(autokey="auto1")
+    auto2 = Automation.objects.filter(autokey="auto2")
+    routerside = Routerm.objects.all()
     context = {
-        'auto': auto,
-        'router': router,
+         'auto1': auto1,
+        'auto2': auto2,
+        'routerside': routerside,
     }
     return render(request, "home.html", context)
 
@@ -73,14 +75,16 @@ def addr(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def detailrouter(request, id):
-    auto = Automation.objects.all()
-    router = Routerm.objects.all()
+    auto1 = Automation.objects.filter(autokey="auto1")
+    auto2 = Automation.objects.filter(autokey="auto2")
+    routerside = Routerm.objects.all()
     idk = id
-    data = Routerm.objects.filter(pk=id)
+    router = Routerm.objects.filter(pk=id)
     context = {
-        'auto1': auto,
-        'data': data,
+        'auto1': auto1,
+        'auto2': auto2,
         'router': router,
+        'routerside': routerside,
         'idk': idk
     }
     return render(request, 'detailrouter.html', context)

@@ -7,47 +7,54 @@ Automations
 {% endblock judul %}
 {% block content %}
     
-    {% for data in data %}
-    {{data.nama}} |
-    {{data.host}} sebagai
-    <strong> {{data.user}}</strong>
+    {% for router in router %}
+    {{router.nama}} |
+    {{router.host}} sebagai
+    <strong> {{router.user}}</strong>
     <div class="row mt-4">
    
-    <div class="col-sm-6 ">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5 class="card-title text-danger">Simple Bandwidth</h5>
-          <p class="card-text">jjjsjjsjnd hjjjs sjjjdjjdbajjnndnnndllfl.</p>
-          <a href="{% url 'conpcq1' data.id %}" class="btn btn-primary rounded-pill">Go somewhere</a>
+      {% for auto1 in auto1 %}
+        <div class="col-sm-6 ">
+          <div class="card shadow">
+            <div class="card-body">
+              <h5 class="card-title text-danger">{{auto1.nama}}</h5>
+              <p class="card-text">{{auto1.deskripsi|truncatechars:180}}</p>
+              <a href="{% url 'conpcq1' router.id %}" class="btn btn-primary rounded-pill">Go somewhere</a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      {% endfor %}
 
-    <div class="col-sm-6 ">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5 class="card-title text-danger">Simple dan Akurat</h5>
-          <p class="card-text">jjjsjjsjnd hjjjs sjjjdjjdbajjnndnnndllfl.</p>
-          <a href="{% url 'autosetting1' data.id 1 %}" class="btn btn-primary rounded-pill">Go somewhere</a>
+      {% for auto2 in auto2 %}
+      <div class="col-sm-6 ">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title text-danger">{{auto2.nama}}</h5>
+            <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
+            <a href="{% url 'autosetting1' router.id 1 %}" class="btn btn-primary rounded-pill">Go somewhere</a>
+          </div>
         </div>
       </div>
-    </div>
+      {% endfor %}
  
     </div>
 
-    {% endfor %}
+  {% endfor %}
   
 
 {% endblock content %} 
 {% block router %}
 
-   {% for router in router %}
-        <li class="nav-item ">
-        <a class="nav-link {% if idk == router.id %}shadow text-white bg-info{% endif %}" href="{% url 'router' router.id %}">
-            <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">
+
+
+     {% for router in routerside %}
+        <li class="nav-item">
+        <a class="nav-link {% if router.id == idk %}shadow text-white bg-info{% endif %}" href="{% url 'router' router.id %}">
+            <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">&nbsp;
             {{router.nama}}
         </a>
     </li>
+  
     {% endfor %}
     
 {% endblock router %}
