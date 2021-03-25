@@ -17,7 +17,7 @@ Automations
         {% endfor %}
     {% endif %}
 
-  {% for router in routerside|slice:":1" %}
+  {% for router in router|slice:":1" %}
       <h2 class="text-primary">Router: {{router.nama}}</h2>
       <p>silahkan pilih outamasi yang akan di gunakan untuk bandwidth:</p>
       <div class="row ">
@@ -55,18 +55,20 @@ Automations
 
 {% endblock content %} 
 
-{% block router %}
-  
-    {% for router in routerside %}
+{% block routerside %}
+
+  {% for router in router|slice:":1" %}
+    {% for routerside in routerside %}
         <li class="nav-item">
         
-        <a class="nav-link {% if router.id == "s" %}shadow text-white bg-info{% endif %}" href="{% url 'router' router.id %}">
+        <a class="nav-link {% if routerside.id == router.id %}shadow text-white bg-info{% endif %}" href="{% url 'router' routerside.id %}">
             <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">&nbsp;
-            {{router.nama}}
+            {{routerside.nama}}
         </a>
       
     </li>
   
     {% endfor %}
+  {% endfor %}
     
-{% endblock router %}
+{% endblock routerside %}

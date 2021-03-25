@@ -1,10 +1,14 @@
 
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}Router | {% for data in data %}{{data.nama}}{% endfor %} {% endblock title %} 
+
 {% block judul %}
 Automations
 {% endblock judul %}
+
+
 {% block content %}
     
     {% for router in router %}
@@ -41,20 +45,20 @@ Automations
 
   {% endfor %}
   
-
 {% endblock content %} 
-{% block router %}
 
 
 
-     {% for router in routerside %}
-        <li class="nav-item">
-        <a class="nav-link {% if router.id == idk %}shadow text-white bg-info{% endif %}" href="{% url 'router' router.id %}">
+{% block routerside %}
+
+    {% for routerside in routerside %}
+      <li class="nav-item">
+        <a class="nav-link {% if routerside.id == idk %}shadow text-white bg-info{% endif %}" href="{% url 'router' routerside.id %}">
             <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">&nbsp;
-            {{router.nama}}
+            {{routerside.nama}}
         </a>
-    </li>
+      </li>
   
     {% endfor %}
     
-{% endblock router %}
+{% endblock routerside %}
