@@ -15,8 +15,9 @@ class AutomationonAdmin(admin.ModelAdmin):
     list_per_page = 10
     
 
-
+@admin.register(Automation)
+class AutomationAdmin(admin.ModelAdmin):
+    list_display= ('autokey', 'nama')
 
 admin.site.register(Routerm)
 
-admin.site.register(Automation)

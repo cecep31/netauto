@@ -1,3 +1,4 @@
+from enum import unique
 from django.db import models
 
 # Create your models here.
@@ -21,6 +22,7 @@ class Routerm(models.Model):
 
 
 class Automation(models.Model):
+    autokey = models.CharField(blank=True, max_length=50)
     nama = models.CharField(max_length=50)
     deskripsi = models.TextField()
     status = models.CharField(max_length=15, blank=True)
