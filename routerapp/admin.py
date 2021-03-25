@@ -12,7 +12,7 @@ class Contohadmin(admin.ModelAdmin):
 @admin.register(Automationon)
 class AutomationonAdmin(admin.ModelAdmin):
     list_display= ('auto','router', 'create_at')
-    
+    list_per_page = 10
     
 
 
