@@ -163,10 +163,12 @@ def autosettingview1(request, router, id):
 @login_required(login_url=settings.LOGIN_URL)
 def manualcommand(request):
     from .forms import Manualform
+    router = Routerm.objects.all()
     f = Manualform
 
     context = {
         'form': f,
+        'router': router
     }
 
     return render(request, 'manualc.html', context)
