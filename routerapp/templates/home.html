@@ -16,18 +16,27 @@
 {% endfor %}
  {% endif %}
 
-<div class="home">ini adalah home dan pengenalan</div>
+<div id="home" class="home">ini adalah home dan pengenalan</div>
 
 <script>
   $(document).ready(function(){
     $("#trigger").click(function(){
-      $("#getstart").toggle(300);
-      $('#trigger').html("tidak sekarang");
+      $("#getstart").show(300);
+      $("#home").hide(300);
+      $('#trigger').hide();
+      $('#trigger2').show();
+    });
+
+    $('#trigger2').click(function(){
+      $('#trigger').show();
+      $('#trigger2').hide();
+      $("#getstart").hide(300);
     });
   });
 </script>
 
 <button class="btn btn-info" id="trigger" >mulai otomasi jaringan</button>
+<button class="btn btn-info" style="display: none;"  id="trigger2" >tidak sekarang</button>
 
 
 <div style="display: none;" id="getstart">

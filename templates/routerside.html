@@ -1,10 +1,12 @@
 
+<div class="pb-lg-5 overflow-auto">
     {% load static %}
     {% for routerside in routerside %}
     <li class="nav-item">
-        <a class="nav-link {% if routerside.id == idk or routerside.id == router.id %}shadow text-white bg-info{% endif %}" href="{% url 'router' routerside.id %}">
+        <a class="nav-link {% if routerside.id == idk %}shadow text-white bg-info{% endif %}" href="{% url 'router' routerside.id %}">
             <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">&nbsp;
-                {{routerside.nama}}
-            </a>
-        </li>
+            {{routerside.nama}}
+        </a>
+    </li>
     {% endfor %}
+</div>    

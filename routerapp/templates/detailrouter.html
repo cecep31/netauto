@@ -15,9 +15,10 @@ Automations
     {{router.nama}} |
     {{router.host}} sebagai
     <strong> {{router.user}}</strong>
-    <div class="row mt-4">
-   
-      {% for auto1 in auto1 %}
+    <div id="auto" class="row mt-4">
+     
+
+        {% for auto1 in auto1 %}
         <div class="col-sm-6 ">
           <div class="card shadow">
             <div class="card-body">
@@ -27,23 +28,37 @@ Automations
             </div>
           </div>
         </div>
-      {% endfor %}
-
-      {% for auto2 in auto2 %}
-      <div class="col-sm-6 ">
-        <div class="card shadow">
-          <div class="card-body">
-            <h5 class="card-title text-danger">{{auto2.nama}}</h5>
-            <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
-            <a href="{% url 'autosetting1' router.id 1 %}" class="btn btn-primary rounded-pill">Go somewhere</a>
+        {% endfor %}
+        
+        {% for auto2 in auto2 %}
+        <div class="col-sm-6 ">
+          <div class="card shadow">
+            <div class="card-body">
+              <h5 class="card-title text-danger">{{auto2.nama}}</h5>
+              <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
+              <button id="auto2" class="btn btn-primary rounded-pill">seting</button>
+              <!-- <a href="{% url 'autosetting1' router.id 1 %}" class="btn btn-primary rounded-pill">Go somewhere</a> -->
+            </div>
           </div>
         </div>
-      </div>
-      {% endfor %}
- 
+        
+        {% endfor %}
+      
+      
     </div>
-
-  {% endfor %}
+    
+    {% endfor %}
+    <div id="form" style="display: none;">
+      ini adalah form contoh
+    </div>
+  <script>
+    $(document).ready(function(){
+      $("#auto2").click(function(){
+        $("#auto").hide(300);
+        $('#form').show(300);
+      });
+    });
+  </script>
   
 {% endblock content %} 
 
