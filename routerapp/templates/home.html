@@ -1,64 +1,75 @@
-
 {% extends 'base.html' %}
-{% load static %}
-{% block title %} home {% endblock title %} 
-{% block judul %}
-Automations
-{% endblock judul %}
+ {% load static %} 
+ {% block title %} home {% endblock title %} 
+ {% block judul %} Automations {% endblock judul %} {% block content %}
+{% if messages %}
+ {% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong> {{ message }}</strong>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endfor %}
+ {% endif %}
 
-{% block content %}
-    {% if messages %}
-       
-        {% for message in messages %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <strong> {{ message }}</strong>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-    {% endif %}
+<div class="home">ini adalah home dan pengenalan</div>
 
+<script>
+  $(document).ready(function(){
+    $("#trigger").click(function(){
+      $("#getstart").toggle(300);
+      $('#trigger').html("tidak sekarang");
+    });
+  });
+</script>
+
+<button class="btn btn-info" id="trigger" >mulai otomasi jaringan</button>
+
+
+<div style="display: none;" id="getstart">
   {% for router in router|slice:":1" %}
-      <h2 class="text-primary">Router: {{router.nama}}</h2>
-      <p>silahkan pilih outamasi yang akan di gunakan untuk bandwidth:</p>
-      <div class="row ">
-    
-      {% for auto1 in auto1 %}
-          <div class="col-sm-6 ">
-            <div class="card shadow">
-              <div class="card-body">
-                <h5 class="card-title text-danger">{{auto1.nama}}</h5>
-                <p class="card-text">{{auto1.deskripsi|truncatechars:180}}</p>
-                <a href="{% url 'conpcq1' router.id %}" class="btn btn-primary rounded-pill">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-
-        {% for auto2 in auto2 %}
-        <div class="col-sm-6 ">
-          <div class="card shadow">
-            <div class="card-body">
-              <h5 class="card-title text-danger">{{auto2.nama}}</h5>
-              <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
-              <a href="{% url 'autosetting1' router.id 1 %}" class="btn btn-primary rounded-pill">Go somewhere</a>
-            </div>
-          </div>
+  <h2 class="text-primary">Router: {{router.nama}}</h2>
+  <p>silahkan pilih outamasi yang akan di gunakan untuk bandwidth:</p>
+  <div class="row">
+    {% for auto1 in auto1 %}
+    <div class="col-sm-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title text-danger">{{auto1.nama}}</h5>
+          <p class="card-text">{{auto1.deskripsi|truncatechars:180}}</p>
+          <a
+            href="{% url 'conpcq1' router.id %}"
+            class="btn btn-primary rounded-pill"
+            >Go somewhere</a
+          >
         </div>
-        {% endfor %}
-  
       </div>
+    </div>
+    {% endfor %} 
+    {% for auto2 in auto2 %}
+    <div class="col-sm-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title text-danger">{{auto2.nama}}</h5>
+          <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
+          <a
+            href="{% url 'autosetting1' router.id 1 %}"
+            class="btn btn-primary rounded-pill"
+            >Go somewhere</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
   {% endfor %}
+</div>
 
-
-    
-
-
-{% endblock content %} 
-
-{% block routerside %}
-
-  {% for router in router|slice:":1" %}
-    {% include 'routerside.html' %}
-  {% endfor %}
-    
-{% endblock routerside %}
+{% endblock content %} {% block routerside %} 
+{% for router in router|slice:":1"%}
+   {% include 'routerside.html' %}
+ {% endfor %} {% endblock routerside %}
