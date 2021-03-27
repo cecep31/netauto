@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Contohmodel, Routerm, Automation
-from .forms import Formcontoh, RoutermForm
+from .forms import Formcontoh, RoutermForm, auto2Form
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from . import sendcom
@@ -82,12 +82,14 @@ def detailrouter(request, id):
     routerside = Routerm.objects.all()
     idk = id
     router = Routerm.objects.filter(pk=id)
+    auto2form=auto2Form
     context = {
         'auto1': auto1,
         'auto2': auto2,
         'router': router,
         'routerside': routerside,
-        'idk': idk
+        'idk': idk,
+        'auto2form':auto2form
     }
     return render(request, 'detailrouter.html', context)
 

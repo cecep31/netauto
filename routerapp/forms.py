@@ -33,3 +33,6 @@ class Manualform(ModelForm):
             'host': forms.Select({'class': 'form-control'}),
             'command': forms.TextInput({'class': 'form-control'})
         }
+
+class auto2Form(forms.Form):
+    kecepatan = forms.CharField(widget=forms.TextInput({'class':'form-control', 'placeholder': 'dalam kilobyte / boloh juga kosongkan'}),label="kecepatan minimum",max_length=50, required=False)

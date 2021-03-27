@@ -36,7 +36,18 @@ Automations
             <div class="card-body">
               <h5 class="card-title text-danger">{{auto2.nama}}</h5>
               <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
-              <button id="auto2" class="btn btn-primary rounded-pill">seting</button>
+              <div  style="display: none;" id="auto2form">
+                <form action="" method="post">
+                  {{auto2form}}
+                  <br>
+               
+                    <input class="btn btn-primary" type="submit" value="Kirim sekarang">
+                    <button class="btn btn-warning">Cencel</button>
+               
+                  
+                </form>
+              </div>
+              <button id="auto2" class="btn btn-primary rounded-pill">setting</button>
               <!-- <a href="{% url 'autosetting1' router.id 1 %}" class="btn btn-primary rounded-pill">Go somewhere</a> -->
             </div>
           </div>
@@ -54,8 +65,8 @@ Automations
   <script>
     $(document).ready(function(){
       $("#auto2").click(function(){
-        $("#auto").hide(300);
-        $('#form').show(300);
+        $("#auto2").hide(300);
+        $('#auto2form').show(300);
       });
     });
   </script>
