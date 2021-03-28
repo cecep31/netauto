@@ -1,0 +1,35 @@
+  {% load static %}
+ {% for auto1 in auto1 %}
+       <div class="col-sm-6 ">
+         <div class="card shadow">
+           <div class="card-body">
+             <h5 class="card-title text-danger">{{auto1.nama}}</h5>
+             <p class="card-text">{{auto1.deskripsi|truncatechars:180}}</p>
+             <a href="{% url 'conpcq1' router.id %}" class="btn btn-primary rounded-pill">Kirim Langsung</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        
+        {% for auto2 in auto2 %}
+        <div class="col-sm-6 ">
+          <div class="card shadow">
+            <div class="card-body">
+              <h5 class="card-title text-danger">{{auto2.nama}}</h5>
+              <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
+              <div  style="display: none;" id="auto2form">
+                <form action="" method="post">
+                  {% csrf_token %}
+                  {{auto2form}}
+                  <br>
+                  <input class="btn btn-primary" type="submit" value="Kirim sekarang">
+                  <div id="clsauto2form" class="btn btn-warning">Cencel</div>
+                </form>
+              </div>
+              <button id="auto2" class="btn btn-info rounded-pill">setting <img src="{% static 'icons/autodown.svg' %}" alt=""></button>
+              <!-- <a href="{% url 'autosetting1' router.id 1 %}" class="btn btn-primary rounded-pill">Go somewhere</a> -->
+            </div>
+          </div>
+        </div>
+        
+        {% endfor %}

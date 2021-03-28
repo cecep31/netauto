@@ -24,12 +24,14 @@ def homepage(request):
     auto1 = Automation.objects.filter(autokey="auto1")
     auto2 = Automation.objects.filter(autokey="auto2")
     routerside = Routerm.objects.all()
+    auto2form=auto2Form
     router = Routerm.objects.all()[:1]
     context = {
         'auto1': auto1,
         'auto2': auto2,
         'router':router,
         'routerside': routerside,
+        'auto2form':auto2form
     }
     return render(request, "home.html", context)
 

@@ -18,25 +18,11 @@
 
 <div id="home" class="home">ini adalah home dan pengenalan</div>
 
-<script>
-  $(document).ready(function(){
-    $("#trigger").click(function(){
-      $("#getstart").show(300);
-      $("#home").hide(300);
-      $('#trigger').hide();
-      $('#trigger2').show();
-    });
 
-    $('#trigger2').click(function(){
-      $('#trigger').show();
-      $('#trigger2').hide();
-      $("#getstart").hide(300);
-    });
-  });
-</script>
 
 <button class="btn btn-info" id="trigger" >mulai otomasi jaringan</button>
 <button class="btn btn-info" style="display: none;"  id="trigger2" >tidak sekarang</button>
+
 
 
 <div style="display: none;" id="getstart">
@@ -44,36 +30,7 @@
   <h2 class="text-primary">Router: {{router.nama}}</h2>
   <p>silahkan pilih outamasi yang akan di gunakan untuk bandwidth:</p>
   <div class="row">
-    {% for auto1 in auto1 %}
-    <div class="col-sm-6">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5 class="card-title text-danger">{{auto1.nama}}</h5>
-          <p class="card-text">{{auto1.deskripsi|truncatechars:180}}</p>
-          <a
-            href="{% url 'conpcq1' router.id %}"
-            class="btn btn-primary rounded-pill"
-            >Go somewhere</a
-          >
-        </div>
-      </div>
-    </div>
-    {% endfor %} 
-    {% for auto2 in auto2 %}
-    <div class="col-sm-6">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5 class="card-title text-danger">{{auto2.nama}}</h5>
-          <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
-          <a
-            href="{% url 'autosetting1' router.id 1 %}"
-            class="btn btn-primary rounded-pill"
-            >Go somewhere</a
-          >
-        </div>
-      </div>
-    </div>
-    {% endfor %}
+    {% include 'auto.html' %}
   </div>
   {% endfor %}
 </div>
