@@ -147,7 +147,7 @@ def pcq2(request, id):
     HttpResponseRedirect(reverse())
 
     send = sendcom.Remote(host, user, passw, speed)
-    v = send.pcq()
+    v = send.pcq2()
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
@@ -195,7 +195,7 @@ def loginya(request):
         else:
             # Return an 'invalid login' error message.
             ...
-            return redirect('show')
+            return redirect('login')
     else:
 
         context = {

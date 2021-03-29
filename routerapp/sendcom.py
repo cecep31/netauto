@@ -34,7 +34,6 @@ class Remote:
         return j, net
 
     def pcq1(self):
-        j, net = self.scanip()
         
         # stdin, stdout, stderr = self.connectssh().exec_command("ip address print \n interface print ")
         try:
@@ -54,6 +53,10 @@ class Remote:
             return "Sudah Di Set sebelumnya"
         else:
             return "Berhasil di aktifkan"
+    def pcq2(self,limit=0):
+        j, net = self.scanip()
+        
+
 
 
 def show_ip(ip_add, username, password):
