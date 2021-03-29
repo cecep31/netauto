@@ -175,14 +175,14 @@ def autosettingview1(request, router, id):
 def manualcommand(request):
     from .forms import Manualform
     routerside = Routerm.objects.all()
-    f = Manualform
 
     context = {
-        'form': f,
+        'form': Manualform,
         'routerside': routerside
     }
 
     return render(request, 'manualc.html', context)
+
 
 def loginya(request):
     if request.method == 'POST':
