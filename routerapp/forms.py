@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from .models import Contohmodel, Routerm, Manualcommand
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class Formcontoh(ModelForm):
@@ -36,3 +37,8 @@ class Manualform(ModelForm):
 
 class auto2Form(forms.Form):
     kecepatan = forms.CharField(widget=forms.TextInput({'class':'form-control', 'placeholder': 'dalam kilobyte / boleh juga kosongkan'}),label="kecepatan minimum",max_length=50, required=False)
+
+class LoginForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput({'class':'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput({'class':'form-control'}))
+    

@@ -1,9 +1,9 @@
 from routerapp import forms
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView,LogoutView
 from django.forms import widgets
 from django.urls import path
 from . import views
+from .forms import LoginForm
 
 urlpatterns = [
     path('command',views.manualcommand, name='manual'),
@@ -12,7 +12,7 @@ urlpatterns = [
     path('', views.homepage, name='show'),
     path('addrouter',views.addrouter, name='addrouter'),
     path('beta/',views.apiip, name='beta'),
-    path('login',LoginView.as_view(), name='login'),
+    path('login',views.loginya, name='login'),
     path('logout',LogoutView.as_view(next_page='login'), name='logout'),
     path('auto/<int:router>/<int:id>',views.autosettingview1, name='autosetting1'),
     

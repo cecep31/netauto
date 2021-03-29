@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Contohmodel, Routerm, Automation
-from .forms import Formcontoh, RoutermForm, auto2Form
+from .forms import Formcontoh, RoutermForm, auto2Form, LoginForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from . import sendcom
 import json
 import routeros_api
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
 
 
 # Create your views here.
@@ -182,3 +183,22 @@ def manualcommand(request):
     }
 
     return render(request, 'manualc.html', context)
+
+def loginya(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('show')
+        else:
+            # Return an 'invalid login' error message.
+            ...
+            return redirect('show')
+    else:
+
+        context = {
+            'form' : LoginForm,
+        }
+        return render(request, 'registration/login.html', context)
