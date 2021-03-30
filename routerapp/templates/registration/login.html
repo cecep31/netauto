@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-
+    <script src="{% static 'js/jquery.js' %}"></script>
     <style>
       body {
         background-image: url({% static "img/back.jpeg" %});
@@ -17,7 +17,7 @@
   <body>
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-md-4 mt-5 shadow p-5 rounded" style="background-color: yellow;">
+        <div id="logincard"  class="col-md-4 mt-5 shadow p-5 rounded" style="background-color: yellow; display: none;">
         {% if form.errors %}
         <center>
         <p class="text-danger">username atau password yang di masukan salah</p>
@@ -50,5 +50,10 @@
         </div>
       </div>
     </div>
+    <script>
+      $(document).ready(function(){
+        $('#logincard').show(500);
+      });
+    </script>
   </body>
 </html>

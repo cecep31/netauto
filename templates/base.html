@@ -50,7 +50,7 @@
               <a class="nav-link {% if request.path == manual_url %} bg-info text-white {% endif %} " href="{% url 'manual' %}">
                 <img src="{% static 'icons/terminal.svg' %}" alt="">
                 <span data-feather="file"></span>&nbsp;
-                Manual config
+                Manual Config
               </a>
             </li>
             <hr>
@@ -59,7 +59,7 @@
               <a class="nav-link" href="#">
                 <img src="{% static 'icons/report.svg' %}" alt="">
                 <span data-feather="bar-chart-2"></span>&nbsp;
-                Reports
+                Reports Bug
               </a>
             </li>
             <li class="nav-item">
@@ -134,10 +134,12 @@
             width="900"
             height="380"
           ></canvas> {% endcomment %} -->
+        <div id="main" style="display: none;">
 
-        {% block content %}
-
-        {% endblock content %}
+          {% block content %}
+          
+          {% endblock content %}
+        </div>
 
 
       </main>
@@ -150,6 +152,7 @@
   
   <script>
     $(document).ready(function(){
+      $("#main").show("fast")
       //home
       $("#trigger").click(function(){
         $("#getstart").show(300);
