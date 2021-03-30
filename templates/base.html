@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
+{% url 'manual' as manual_url %}
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,7 +47,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'manual' %}">
+              <a class="nav-link {% if request.path == manual_url %} bg-info text-white {% endif %} " href="{% url 'manual' %}">
                 <img src="{% static 'icons/terminal.svg' %}" alt="">
                 <span data-feather="file"></span>&nbsp;
                 Manual config
