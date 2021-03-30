@@ -15,5 +15,7 @@ urlpatterns = [
     path('login',views.loginya, name='login'),
     path('logout',LogoutView.as_view(next_page='login'), name='logout'),
     path('auto/<int:router>/<int:id>',views.autosettingview1, name='autosetting1'),
+    path('delrouter/<int:idr>',views.delrouter,name='delrouter'),
+    path('updaterouter/<int:idr>',views.updaterouter,name='uprouter'),
     
 ]

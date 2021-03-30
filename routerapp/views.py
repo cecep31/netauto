@@ -57,25 +57,45 @@ def addrouter(request):
 
             messages.success(
                 request, "berhasil menambahkan " + form['nama'].value())
-            return HttpResponseRedirect(reverse("addrouter"))
+            return redirect('addrouter')
+            # return HttpResponseRedirect(reverse("addrouter"))
     else:
         routerside = Routerm.objects.all()
         form = RoutermForm
         context = {
-            'formk': form,
+            'form': form,
             'routerside': routerside
         }
         return render(request, "addrouter.html", context)
 
-
 @login_required(login_url=settings.LOGIN_URL)
-def addr(request):
+def updaterouter(request, idr):
+    router = Routerm.objects.get(id=idr)
     if request.method == 'POST':
-        form = RoutermForm(request.POST)
+        form = RoutermForm(request, instance=router)
         if form.is_valid():
             form.save()
-            messages.success(request, "berhasil bosku")
-            return redirect(addrouter)
+            return redirect('router', args=[idr])
+    else:
+        form = RoutermForm(instance=Routerm)
+        routerside = Routerm.objects.all()
+        context = {
+            'form' : form,
+            'routerside': routerside
+        }
+        return render(request, 'uprouter.html', context)
+
+@login_required(login_url=settings.LOGIN_URL)
+def delrouter(request, idr):
+    router = Routerm.objects.filter(id=idr)
+    for ro in router:
+        namar = ro.nama
+        
+    router.delete()
+
+    messages.success(
+                request, "Berhasil menghapus router" + namar)
+    return HttpResponseRedirect(reverse("show"))
 
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -132,7 +152,8 @@ def pcq1(request, id):
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
     messages.success(request, v)
-    return HttpResponseRedirect(reverse('show'))
+    return redirect('show')
+    # return HttpResponseRedirect(reverse('show'))
 
 
 @login_required(login_url=settings.LOGIN_URL)

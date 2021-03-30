@@ -15,8 +15,31 @@ Automations
     {{router.nama}} |
     {{router.host}} sebagai 
     <div class="float-end">
-      <a class="btn btn-warning mr-4" href="">Edit Router</a>
-      <a class="btn btn-danger" onclick="confirm('yakin ingin menghapus router ini')" href="">Delete Router</a>
+      <a class="btn btn-warning mr-4" href="{% url 'uprouter' router.id %}">Edit Router</a>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modaldelrouter">
+        Delete Router
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="modaldelrouter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Confirmasi Action</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              akan mehapus semua data Router ini dan riwayatnya
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <a href="{% url 'delrouter' router.id %}" class="btn btn-primary">Tetap hapus</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% comment %} modal {% endcomment %}
     </div> 
     <strong> {{router.user}}</strong>
     <div id="auto" class="row mt-4">
