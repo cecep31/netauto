@@ -72,14 +72,16 @@ def addrouter(request):
 def updaterouter(request, idr):
     router = Routerm.objects.get(id=idr)
     if request.method == 'POST':
-        form = RoutermForm(request, instance=router)
+        form = RoutermForm(request.POST, instance=router)
         if form.is_valid():
             form.save()
-            return redirect('router', args=[idr])
+            messages.success(request,"berhasil mengubah router")
+            return redirect('router', idr)
     else:
-        form = RoutermForm(instance=Routerm)
+        form = RoutermForm(instance=router)
         routerside = Routerm.objects.all()
         context = {
+            'idk' : idr,
             'form' : form,
             'routerside': routerside
         }

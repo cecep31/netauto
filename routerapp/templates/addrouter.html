@@ -23,13 +23,5 @@
 {% endblock content %} 
 {% block routerside %}
 
-   {% for routerside in routerside %}
-        <li class="nav-item">
-        <a class="nav-link" href="{% url 'router' routerside.id %}">
-            <span data-feather="file-text"> </span><img src="{% static 'icons/wifi.svg' %}" alt="">&nbsp;
-            {{routerside.nama}}
-        </a>
-    </li>
-    {% endfor %}
-    
+    {% include 'routerside.html' %}
 {% endblock routerside %}
