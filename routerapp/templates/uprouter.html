@@ -17,7 +17,9 @@
     <form action="" method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <input class="btn btn-primary" type="submit" value="tambah Router">
+        <input class="btn btn-primary" type="submit" value="Simpan Perubahan">
+        <a href="{% url 'router' idk %}" class="btn btn-secondary" >Cencel</a>
+        
     </form> 
 
 {% endblock content %} 
