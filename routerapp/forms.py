@@ -34,7 +34,7 @@ class Manualform(ModelForm):
         widgets = {
             'host': Select({'class': 'form-control'}),
             'command': TextInput({'class': 'form-control'}),
-            'output' : Textarea(attrs={'id':'out','class': 'form-control bg-dark text-white', 'disabled':True})
+            'output' : Textarea(attrs={'id':'out','class': 'form-control bg-dark text-white', 'disabled':True, 'rows':"5", 'cols':"70" })
         }
 
 class auto2Form(forms.Form):

@@ -4,19 +4,29 @@
 {% block content %}
 <form action="" class="form">
   {% csrf_token %} 
-  {{form.as_p}}
-  <div id="kirimc" class="btn btn-primary">Kirim</div>
+  
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Host</label>
+    {{form.host}}
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Host</label>
+    {{form.command}}
+  </div>
+  <div id="kirimc" class="btn btn-primary mb-4">Kirim</div>
+
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Ouput</label>
+    {{form.output}}
+  </div>
+
+  <button class="btn btn-success">Simpan Sebagai Riwayat</button>
+  
 </form>
 <br />
 
-<textarea
-  id="out"
-  rows="10"
-  cols="70"
-  placeholder=" ouput command ..."
-  disabled
-  class="disabled"
-></textarea>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
