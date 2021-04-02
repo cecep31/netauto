@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from django.forms.widgets import Select, TextInput
+from django.forms.widgets import Select, TextInput, Textarea
 from .models import Contohmodel, Routerm, Manualcommand
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
@@ -30,10 +30,11 @@ class Manualform(ModelForm):
 
     class Meta:
         model = Manualcommand
-        fields = ['host', 'command']
+        fields = ['host', 'command','output']
         widgets = {
             'host': Select({'class': 'form-control'}),
-            'command': TextInput({'class': 'form-control'})
+            'command': TextInput({'class': 'form-control'}),
+            'output' : Textarea(attrs={'id':'out','class': 'form-control bg-dark text-white', 'disabled':True})
         }
 
 class auto2Form(forms.Form):

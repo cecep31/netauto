@@ -43,10 +43,8 @@ class Manualcommand(models.Model):
     host = models.ForeignKey(Routerm, on_delete=models.CASCADE)
     command = models.CharField(max_length=255)
     output = models.TextField(blank=True)
-    time = models.DateTimeField(auto_now=True)
+    time = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.time
 
 class Automationon(models.Model):
     auto = models.ForeignKey(Automation, on_delete=models.CASCADE)

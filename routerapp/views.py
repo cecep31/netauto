@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
@@ -194,11 +195,14 @@ def autosettingview1(request, router, id):
     return render(request, 'autosettingview.html', context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
+
 def manualcommand(request):
     from .forms import Manualform
     routerside = Routerm.objects.all()
-
+    if request.method == "POST":
+        form = Manualform(request.POST)
+        if form.is_valid():
+            return JsonResponse(data={"data": "sukses"}, status=200)
     context = {
         'form': Manualform,
         'routerside': routerside

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contohmodel, Routerm, Automation, Automationon
+from .models import Contohmodel, Manualcommand, Routerm, Automation, Automationon
 
 # Register your models here.
 @admin.register(Contohmodel)
@@ -18,6 +18,10 @@ class AutomationonAdmin(admin.ModelAdmin):
 @admin.register(Automation)
 class AutomationAdmin(admin.ModelAdmin):
     list_display= ('autokey', 'nama')
+
+@admin.register(Manualcommand)
+class manualAdmin(admin.ModelAdmin):
+    list_display= ['host']
 
 admin.site.register(Routerm)
 
