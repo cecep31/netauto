@@ -36,7 +36,7 @@
       const host = document.querySelector("[name=host]").value;
       const command = document.querySelector("[name=command]").value;
       $.post(
-        "http://127.0.0.1:8000/command",
+        "http://127.0.0.1:8000/commandajax",
         {
           csrfmiddlewaretoken: csrftoken,
           host: host,

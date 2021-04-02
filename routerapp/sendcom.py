@@ -56,6 +56,27 @@ class Remote:
     def pcq2(self,limit=0):
         j, net = self.scanip()
         
+    def command(self, command):
+        try:
+            stdin, stdout, stderr = self.connectssh().exec_command(command)
+            time.sleep(1)
+        except paramiko.AuthenticationException:
+            return "Gagal untuk login pastikan username dan password benar"
+        except paramiko.BadHostKeyException:
+            return "Proses gagal roueter tidak terhubung"
+        except NoValidConnectionsError:
+            return "Proses gagal roueter tidak terhubung"
+        except TimeoutError:
+            return "Proses gagal karena router tidak menangapi"
+        except paramiko.SSHException:
+            return "gagal disebabkan ndak tau mungkin config manual commad"
+
+        return stdout.readlines().decode('ascii')
+        if "already" in stdout.read().decode("ascii"):
+            return "Sudah Di Set sebelumnya"
+        else:
+            return "Berhasil di aktifkan"
+
 
 
 

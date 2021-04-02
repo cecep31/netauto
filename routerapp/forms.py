@@ -30,7 +30,7 @@ class Manualform(ModelForm):
 
     class Meta:
         model = Manualcommand
-        fields = ['host', 'command','output']
+        fields = ['host', 'command', 'output']
         widgets = {
             'host': Select({'class': 'form-control'}),
             'command': TextInput({'class': 'form-control'}),

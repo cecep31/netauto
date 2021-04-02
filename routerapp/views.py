@@ -196,20 +196,40 @@ def autosettingview1(request, router, id):
 
 
 
+@login_required(login_url=settings.LOGIN_URL)
 def manualcommand(request):
     from .forms import Manualform
     routerside = Routerm.objects.all()
     if request.method == "POST":
         form = Manualform(request.POST)
         if form.is_valid():
-            return JsonResponse(data={"data": "sukses"}, status=200)
+            form.save()
+            redirect('manual')
+
     context = {
         'form': Manualform,
         'routerside': routerside
     }
-
     return render(request, 'manualc.html', context)
 
+@login_required(login_url=settings.LOGIN_URL)
+def manualcommandajax(request):
+    from .forms import Manualform
+    if request.method == "POST":
+        form = Manualform(request.POST)
+        if form.is_valid():
+                id = request.POST['host']
+                command = request.POST['command']
+                router = Routerm.objects.filter(id=id)
+                for i in router:
+                    user = i.user
+                    passw = i.password
+                    host = i.host
+                    speed = i.kecepatan_internet
+                comen=sendcom.Remote(host,user,passw,speed)
+                outnya=comen.command(command)
+
+                return JsonResponse(data={"data": outnya}, status=200)
 
 def loginya(request):
     if request.method == 'POST':

@@ -17,5 +17,6 @@ urlpatterns = [
     path('auto/<int:router>/<int:id>',views.autosettingview1, name='autosetting1'),
     path('delrouter/<int:idr>',views.delrouter,name='delrouter'),
     path('updaterouter/<int:idr>',views.updaterouter,name='uprouter'),
+    path('commandajax',views.manualcommandajax, name='manualajax'),
     
 ]
