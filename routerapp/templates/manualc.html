@@ -1,37 +1,48 @@
-
-{% extends 'base.html' %}
-{% load static %}
-{% block title %}manual command{% endblock title %} 
-{% block judul %}
-Manual Command
-{% endblock judul %}
+{% extends 'base.html' %} 
+{% load static %} {% block title %}manual command
+{% endblock title %} {% block judul %} Manual Command {% endblock judul %} 
 {% block content %}
-    <script>
-        $(document).ready(function(){
-            $("#send").click(function(){
-              $("#out").val("demo_test.txt");
-            });
-          });
+<form action="" class="form">
+  {% csrf_token %} 
+  {{form.as_p}}
+  <div id="kirimc" class="btn btn-primary">Kirim</div>
+</form>
+<br />
 
-          $(document).ready(function(){
-            $("#send").click(function(){
-              $.get("demo_test.asp", function(data, status){
-                alert("Data: " + data + "\nStatus: " + status);
-              });
-            });
-          });
-    </script>
-    <form action="" class="form">
-        {{form.as_p}}
-        <input type="submit" value="Send" id="send" >
-    </form>
-    <br>
-    
-    <textarea id="out" rows="10" cols="70" placeholder=" ouput command ..." disabled></textarea>
-    
-{% endblock content %} 
-{% block routerside %}
+<textarea
+  id="out"
+  rows="10"
+  cols="70"
+  placeholder=" ouput command ..."
+  disabled
+  class="disabled"
+></textarea>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-   {% include 'routerside.html' %}
-    
+<script>
+  $(document).ready(function () {
+    $("#kirimc").click(function () {
+      const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+      const host = document.querySelector("[name=host]").value;
+      const command = document.querySelector("[name=command]").value;
+      $.post(
+        "http://127.0.0.1:8000/command",
+        {
+          csrfmiddlewaretoken: csrftoken,
+          host: host,
+          command: command,
+        },
+        function (response) {
+          alert(response['data']);
+          $('#out').val(response['data'])
+        }
+      );
+    });
+  });
+</script>
+
+{% endblock content %}
+ {% block routerside %}
+ {% include 'routerside.html' %} 
 {% endblock routerside %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
