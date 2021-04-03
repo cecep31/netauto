@@ -48,8 +48,6 @@
         },
         function (response) {
           $("#loading").hide('fast');
-          alert(response['data']);
-          
           $('#out').val(response['data'])
         }
       );

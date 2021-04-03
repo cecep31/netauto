@@ -71,7 +71,7 @@ class Remote:
         except paramiko.SSHException:
             return "gagal disebabkan ndak tau mungkin config manual commad"
 
-        return stdout.readlines().decode('ascii')
+        return stdout.read().decode('ascii')
         if "already" in stdout.read().decode("ascii"):
             return "Sudah Di Set sebelumnya"
         else:

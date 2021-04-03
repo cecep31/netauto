@@ -229,7 +229,7 @@ def manualcommandajax(request):
                 comen=sendcom.Remote(host,user,passw,speed)
                 outnya=comen.command(command)
 
-                return JsonResponse(data={"data": host}, status=200)
+                return JsonResponse(data={"data": outnya}, status=200)
 
 def loginya(request):
     if request.method == 'POST':
