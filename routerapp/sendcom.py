@@ -55,6 +55,8 @@ class Remote:
             return "Berhasil di aktifkan"
     def pcq2(self,limit=0):
         j, net = self.scanip()
+        if limit == 0:
+            pass
         
     def command(self, command):
         try:
