@@ -1,6 +1,4 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import Contohmodel, Manualcommand, Routerm, Automation, Automationon
 
 # Register your models here.
@@ -26,3 +24,4 @@ class manualAdmin(admin.ModelAdmin):
     list_display= ['host']
 
 admin.site.register(Routerm)
+

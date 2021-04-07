@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <style>
+      body {
+        background-image: url({% static "img/back.jpeg" %});
+        background-size: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row align-items-center">
+        <div id="logincard"  class="col-md-4 mt-5 shadow p-5 rounded" style="background-color: yellow; display: none;">
+        {% if form.errors %}
+        <center>
+        <p class="text-danger">username atau password yang di masukan salah</p>
+        </center>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+            <p class="text-danger">Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+            {% else %}
+            
+            {% endif %}
+        {% endif %}
+        <center>
+          <img src="{% static 'icons/person-fill.svg' %}" width="80" alt="">
+            <h2>Login<h2>
+            </center>
+
+
+          <form method="post">
+          {% csrf_token %}
+          
+            {{form.as_p}}
+            <center>
+            <input class="btn btn-primary" type="submit" value="Masuk">
+            </center>
+            <input type="hidden" name="next" value="{{ next }}">
+            
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function(){
+        $('#logincard').show(500);
+      });
+    </script>
+  </body>
+</html>
