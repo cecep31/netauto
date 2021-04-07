@@ -2,10 +2,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %} home {% endblock title %} 
-{% block content %}
-    
+{% block content %} 
     {% if messages %}
-       
         {% for message in messages %}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <strong> {{ message }}</strong>
