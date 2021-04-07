@@ -204,7 +204,7 @@ def manualcommand(request):
         form = Manualform(request.POST)
         if form.is_valid():
             form.save()
-            redirect('manual')
+            return redirect('manual')
 
     context = {
         'form': Manualform,
