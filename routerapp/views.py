@@ -1,7 +1,7 @@
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from .models import Contohmodel, Routerm, Automation
 from .forms import Formcontoh, RoutermForm, auto2Form, LoginForm
 from django.contrib.auth.decorators import login_required
