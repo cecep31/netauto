@@ -37,8 +37,10 @@ class Remote:
         
         # stdin, stdout, stderr = self.connectssh().exec_command("ip address print \n interface print ")
         try:
+            # stdin, stdout, stderr = self.connectssh().exec_command(
+            # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
             stdin, stdout, stderr = self.connectssh().exec_command(
-            "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
+            "queue type add name=pcqdown kind=pcq pcq-rate=64000 pcq-classifier=dst-address \n queue type add name=pcqup kind=pcq pcq-rate=32000 pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown")
             time.sleep(1)
         except paramiko.AuthenticationException:
             return "Gagal untuk login pastikan username dan password benar"
