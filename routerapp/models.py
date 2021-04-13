@@ -14,7 +14,8 @@ class Routerm(models.Model):
     host = models.CharField(max_length=50)
     user = models.CharField(max_length=30)
     password = models.CharField(max_length=50, blank=True)
-    kecepatan_internet = models.IntegerField(blank=True)
+    kecepatan_download = models.IntegerField(blank=True)
+    kecepatan_upload = models.IntegerField(blank=True)
     pub_date = models.DateField(auto_now=True)
 
     def __str__(self):

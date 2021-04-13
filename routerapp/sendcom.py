@@ -8,11 +8,12 @@ from paramiko.ssh_exception import NoValidConnectionsError
 
 
 class Remote:
-    def __init__(self, host, user, passw, speed):
+    def __init__(self, host, user, passw, speeddown, speedup):
         self.host = host
         self.user = user
         self.passw = passw
-        self.speed = speed
+        self.speed = speeddown
+        self.speed = speedup
 
     def connectssh(self):
         ssh = paramiko.SSHClient()

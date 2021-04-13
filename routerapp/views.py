@@ -147,9 +147,10 @@ def pcq1(request, id):
         user = i.user
         passw = i.password
         host = i.host
-        speed = i.kecepatan_internet
+        speeddown = i.kecepatan_download
+        speedup = i.kecepatan_upload
 
-    send = sendcom.Remote(host, user, passw, speed)
+    send = sendcom.Remote(host, user, passw, speeddown,speedup)
     v = send.pcq1()
 
     # send = sendcom.Remote(host, user, passw, speed)
@@ -225,8 +226,9 @@ def manualcommandajax(request):
                     user = i.user
                     passw = i.password
                     host = i.host
-                    speed = i.kecepatan_internet
-                comen=sendcom.Remote(host,user,passw,speed)
+                    speeddown = i.kecepatan_download
+                    speedup = i.kecepatan_upload
+                comen=sendcom.Remote(host,user,passw,speeddown,speedup)
                 outnya=comen.command(command)
 
                 return JsonResponse(data={"data": outnya}, status=200)

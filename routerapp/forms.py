@@ -22,7 +22,8 @@ class RoutermForm(ModelForm):
             'host': forms.TextInput({'class': 'form-control', 'placeholder': 'alamat host router | contoh: 192.168.1.1'}),
             'user': forms.TextInput({'class': 'form-control', 'placeholder': 'masukan username router'}),
             'password': forms.TextInput({'class': 'form-control', 'placeholder': 'masukan pasword router'}),
-            'kecepatan_internet': forms.TextInput({'class': 'form-control', 'placeholder': 'dalam kilobyte'}),
+            'kecepatan_download': forms.TextInput({'class': 'form-control', 'placeholder': 'dalam kilobyte'}),
+            'kecepatan_upload': forms.TextInput({'class': 'form-control', 'placeholder': 'dalam kilobyte'}),
         }
 
 
