@@ -14,12 +14,12 @@
     {% for message in messages %}
         <div id="liveToast" class="toast bg-info hide" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-warning text-white">
-            <img src="..." class="rounded me-2" alt="...">
-            <strong class="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
+            <img src="{% static 'icons/bell.svg' %}" class="rounded me-2" alt="...">
+            <strong class="me-auto">Result</strong>
+            
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-            <div class="toast-body">
+            <div class="toast-body ">
             {{ message }}.
             </div>
         </div>
