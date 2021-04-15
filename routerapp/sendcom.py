@@ -93,10 +93,9 @@ def show_ip(ip_add, username, password):
     return output, stderr
     pass
 
-
+# this commant
 def show_ipactive(parameter_list):
     host = "192.168.31.1"
-
     conn = routeros_api.RouterOsApiPool(
         host, username="admin", password="", plaintext_login=True)
     api = conn.get_api()
