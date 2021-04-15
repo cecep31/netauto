@@ -77,12 +77,6 @@ class Remote:
             return "gagal disebabkan ndak tau mungkin config manual commad"
 
         return stdout.read().decode('ascii')
-        if "already" in stdout.read().decode("ascii"):
-            return "Sudah Di Set sebelumnya"
-        else:
-            return "Berhasil di aktifkan"
-
-
 
 
 def show_ip(ip_add, username, password):
