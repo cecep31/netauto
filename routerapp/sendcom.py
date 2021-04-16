@@ -12,8 +12,8 @@ class Remote:
         self.host = host
         self.user = user
         self.passw = passw
-        self.speed = speeddown
-        self.speed = speedup
+        self.speeddown = speeddown
+        self.speedup = speedup
 
     def connectssh(self):
         ssh = paramiko.SSHClient()
@@ -40,8 +40,10 @@ class Remote:
         try:
             # stdin, stdout, stderr = self.connectssh().exec_command(
             # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
-            stdin, stdout, stderr = self.connectssh().exec_command(
-            "queue type add name=pcqdown kind=pcq pcq-rate=64000 pcq-classifier=dst-address \n queue type add name=pcqup kind=pcq pcq-rate=32000 pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown")
+            command = "queue type add name=pcqdown kind=pcq pcq-rate={self.speeddown} pcq-classifier=dst-address \n queue type add name=pcqup kind=pcq pcq-rate={self.speedup} pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown"
+
+            stdin, stdout, stderr = self.connectssh().exec_command(command)
+
             time.sleep(1)
         except paramiko.AuthenticationException:
             return "Gagal untuk login pastikan username dan password benar"
@@ -56,7 +58,7 @@ class Remote:
             return "Sudah Di Set sebelumnya"
         else:
             return "Berhasil di aktifkan"
-    def pcq2(self,limit=0):
+    def pcq2(self):
         j, net = self.scanip()
         if limit == 0:
             pass
