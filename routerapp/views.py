@@ -141,7 +141,7 @@ def apiip(request):
 
 
 @login_required(login_url=settings.LOGIN_URL)
-def pcq1(request, id):
+def auto1(request, id):
 
     for i in Routerm.objects.filter(id=id):
         user = i.user
@@ -151,7 +151,7 @@ def pcq1(request, id):
         speedup = i.kecepatan_upload
 
     send = sendcom.Remote(host, user, passw, speeddown,speedup)
-    v = send.pcq1()
+    v = send.autocon1()
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
@@ -161,7 +161,7 @@ def pcq1(request, id):
 
 
 @login_required(login_url=settings.LOGIN_URL)
-def pcq2(request, id):
+def auto2(request, id):
 
     for i in Routerm.objects.filter(id=id):
         user = i.user
