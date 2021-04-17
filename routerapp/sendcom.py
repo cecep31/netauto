@@ -40,7 +40,7 @@ class Remote:
         try:
             # stdin, stdout, stderr = self.connectssh().exec_command(
             # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
-            command = "queue type add name=pcqdown kind=pcq pcq-rate={self.speeddown} pcq-classifier=dst-address \n queue type add name=pcqup kind=pcq pcq-rate={self.speedup} pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown"
+            command = "queue type add name=pcqdown kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcqup kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown \n".format(self.speeddown,self.speedup)
             stdin, stdout, stderr = self.connectssh().exec_command(command)
             time.sleep(1)
         except paramiko.AuthenticationException:
@@ -55,7 +55,7 @@ class Remote:
         if "already" in stdout.read().decode("ascii"):
             return "Sudah Di Set sebelumnya"
         else:
-            return "Berhasil di aktifkan"
+            return "berhasil di set"
     def pcq2(self):
         j, net = self.scanip()
         if limit == 0:
