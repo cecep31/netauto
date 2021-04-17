@@ -1,32 +1,10 @@
 {% extends 'base.html' %}
- {% load static %} 
- {% block title %} home {% endblock title %} 
- {% block judul %} Automations {% endblock judul %} {% block content %}
+{% load static %} 
+{% block title %} home {% endblock title %} 
+{% block judul %} Automations {% endblock judul %} 
+{% block content %}
 
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
-    {% if messages %}
-    <script>
-    $(document).ready(function(){
-      $('.toast').toast('show')
-     
-    });
-  </script>
-    {% for message in messages %}
-        <div id="liveToast" class="toast bg-info hide" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-warning text-white">
-            <img src="{% static 'icons/bell.svg' %}" class="rounded me-2" alt="...">
-            <strong class="me-auto">Result</strong>
-            
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body ">
-            {{ message }}.
-            </div>
-        </div>
-    {% endfor %}
-    {% endif %}
-</div>
-
+{% include 'message.html' %}
 
 
 <div id="home" class="home"><p class="shadow p-3 text-xl-start">aplikasi ini adalah aplikasi management bandwidth yang memudahkan pengguna
@@ -34,7 +12,7 @@
     configurasi bandwidth.</p></div>
 
 <button class="btn btn-info" id="trigger" >Mulai otomasi sekarang</button>
-<button class="btn btn-warning" style="display: none;"  id="trigger2" ><img style="color: aqua;" src="{% static 'icons/arrow-left-circle.svg' %}" alt="">&nbsp; tidak sekarang</button>
+<button class="btn btn-secondary" style="display: none;"  id="trigger2" ><img src="{% static 'icons/arrow-left-circle.svg' %}" alt="">&nbsp; tidak sekarang</button>
 
 
 

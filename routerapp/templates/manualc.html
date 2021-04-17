@@ -13,10 +13,13 @@
     <label for="exampleFormControlInput1" class="form-label">Command</label>
     {{form.command}}
   </div>
-  <div id="kirimc" class="btn btn-primary mb-4">Kirim</div>
-  <div id="loading" style="display: none;" class="spinner-border mb-1" role="status">
+  <div id="kirimc" class="btn btn-primary mb-4">
+  <div id="loading" style="display: none;" class="spinner-border spinner-border-sm" role="status">
     <!-- <span class="sr-only">Loading...</span> -->
   </div>
+  <span id="textnya">Kirim</span>
+  </div>
+  
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Ouput</label>
     {{form.output}}
@@ -34,7 +37,9 @@
 <script>
   $(document).ready(function () {
     $("#kirimc").click(function () {
+      $("#textnya").text("Loading...");
       $("#loading").show('fast');
+      
       const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
       const host = document.querySelector("[name=host]").value;
       const command = document.querySelector("[name=command]").value;
@@ -47,6 +52,7 @@
         },
         function (response) {
           $("#loading").hide('fast');
+          $("#textnya").text("Kirim");
           $('#out').val(response['data'])
         }
       );
