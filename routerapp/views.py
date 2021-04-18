@@ -156,7 +156,7 @@ def auto1(request, id):
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
     messages.success(request, v)
-    return redirect('show')
+    return redirect('router', id)
     # return HttpResponseRedirect(reverse('show'))
 
 
