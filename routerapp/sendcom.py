@@ -23,7 +23,7 @@ class Remote:
 
         return ssh
 
-    def scanip(self):
+    def scanip(self, host):
         import networkscan
         network = self.host+"/24"
         net = ipaddress.ip_network(network, strict=False)
@@ -35,12 +35,13 @@ class Remote:
         return j, net
 
     def autocon1(self):
-        
+
         # stdin, stdout, stderr = self.connectssh().exec_command("ip address print \n interface print ")
         try:
             # stdin, stdout, stderr = self.connectssh().exec_command(
             # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
-            command = "queue type add name=pcqdown kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcqup kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown \n".format(self.speeddown,self.speedup)
+            command = "queue type add name=pcqdown kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcqup kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown \n".format(
+                self.speeddown, self.speedup)
             stdin, stdout, stderr = self.connectssh().exec_command(command)
             time.sleep(1)
         except paramiko.AuthenticationException:
@@ -56,11 +57,32 @@ class Remote:
             return "Sudah Di Set sebelumnya"
         else:
             return "berhasil di set"
-    def pcq2(self):
-        j, net = self.scanip()
-        if limit == 0:
-            pass
-        
+
+    def autocon2(self):
+        j, net = self.scanip("192.168.1.1")
+        limiatdown = self.speeddown/j
+        limiatup = self.speedup/j
+        try:
+            # stdin, stdout, stderr = self.connectssh().exec_command(
+            # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
+            command = "queue type add name=pcqdown kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcqup kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown \n".format(
+                self.speeddown, self.speedup)
+            stdin, stdout, stderr = self.connectssh().exec_command(command)
+            time.sleep(1)
+        except paramiko.AuthenticationException:
+            return "Gagal untuk login pastikan username dan password benar"
+        except paramiko.BadHostKeyException:
+            return "Proses gagal roueter tidak terhubung"
+        except NoValidConnectionsError:
+            return "Proses gagal roueter tidak terhubung"
+        except TimeoutError:
+            return "Proses gagal karena router tidak menangapi"
+
+        if "already" in stdout.read().decode("ascii"):
+            return "Sudah Di Set sebelumnya"
+        else:
+            return "berhasil di set"
+
     def command(self, command):
         try:
             stdin, stdout, stderr = self.connectssh().exec_command(command)
@@ -94,6 +116,8 @@ def show_ip(ip_add, username, password):
     pass
 
 # this commant
+
+
 def show_ipactive(parameter_list):
     host = "192.168.31.1"
     conn = routeros_api.RouterOsApiPool(
