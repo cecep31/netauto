@@ -162,27 +162,25 @@ def auto1(request, id):
 
 @login_required(login_url=settings.LOGIN_URL)
 def auto2(request, id):
-
+    
     for i in Routerm.objects.filter(id=id):
         user = i.user
         passw = i.password
         host = i.host
         speed = i.kecepatan_internet
 
-    HttpResponseRedirect(reverse())
+    if request.method == 'POST':
+        limitat = request.POST['limit']
+        send = sendcom.Remote(host, user, passw, speed)
+        v = send.pcq2(limitat)
+    else:
+        redirect("show")
+        
 
-    send = sendcom.Remote(host, user, passw, speed)
-    v = send.pcq2()
+
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
-
-    context = {
-        'data': v,
-    }
-
-    return render(request, 'pcq2.html', context)
-
 
 @login_required(login_url=settings.LOGIN_URL)
 def autosettingview1(request, router, id):
