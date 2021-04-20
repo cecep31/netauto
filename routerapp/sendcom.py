@@ -25,14 +25,14 @@ class Remote:
 
     def scanip(self, host):
         import networkscan
-        network = self.host+"/24"
-        net = ipaddress.ip_network(network, strict=False)
-        myscan = networkscan.Networkscan(net)
+        network = host+"/24"
+        # net = ipaddress.ip_network(network, strict=False)
+        myscan = networkscan.Networkscan(network)
         myscan.run()
         j = 0
         for i in myscan.list_of_hosts_found:
             j += 1
-        return j, net
+        return j
 
     def autocon1(self):
 
@@ -58,10 +58,23 @@ class Remote:
         else:
             return "berhasil di set"
 
-    def autocon2(self):
-        j, net = self.scanip("192.168.1.1")
+    def addmangel(self, host):
+
+        pass
+    def autocon2(self,limitat=0):
+        if (limitat==0):
+            limitat = self.scanip("192.168.1.1")
+        
         limiatdown = self.speeddown/j
         limiatup = self.speedup/j
+        mgldown = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no"
+        mglupl = "ip firewall mangle add chain=forward src-address=192.168.1.0/24 action=mark-packet new-packet-mark=upl_user passthrough=no"
+        pcqdown="queue type add name=pcq_down kind=pcq pcq-classifier=dst-address,dst-port"
+        pcqupl="queue type add name=pcq_upl kind=pcq pcq-classifier=src-address,src-port"
+        qtdown="queue tree add name=download parent=ether3 max-limit={}k".format(self.speeddown)
+        qtdownc="userdown parent=download packet-mark=down_user queue=pcq_down limit-at=500k max-limit=1000k".format(self.speedup)
+        qtupl="queue tree add name=upload parent=ether1 max-limit=500k"
+        qtuplc="userupl parent=upload packet-mark=upl_user queue=pcq_upl limit-at=250k max-limit=500k"
         try:
             # stdin, stdout, stderr = self.connectssh().exec_command(
             # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
