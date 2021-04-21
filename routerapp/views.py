@@ -167,12 +167,14 @@ def auto2(request, id):
         user = i.user
         passw = i.password
         host = i.host
-        speed = i.kecepatan_internet
+        speeddown = i.kecepatan_download
+        speedup = i.kecepatan_upload
 
     if request.method == 'POST':
-        limitat = request.POST['limit']
-        send = sendcom.Remote(host, user, passw, speed)
-        v = send.pcq2(limitat)
+        limitat = request.POST['limitat']
+        
+        send = sendcom.Remote(host, user, passw, speeddown,speedup)
+        v = send.autocon2(limitat)
     else:
         redirect("show")
         

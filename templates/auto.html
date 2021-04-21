@@ -18,7 +18,7 @@
               <h5 class="card-title text-danger">{{auto2.nama}}</h5>
               <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
               <div  style="display: none;" id="auto2form">
-                <form action="" method="post">
+                <form action="{% url 'urlauto2' router.id %}" method="post">
                   {% csrf_token %}
                   {{auto2form}}
                   <br>

@@ -1,4 +1,3 @@
-import ipaddress
 import paramiko
 import time
 import routeros_api
@@ -61,25 +60,27 @@ class Remote:
     def addmangel(self, host):
 
         pass
-    def autocon2(self,limitat=0):
-        if (limitat==0):
-            limitat = self.scanip("192.168.1.1")
+
+    def autocon2(self, limitatdown=0):
+        jmluser = self.scanip("192.168.1.0")
+        if (limitatdown == 0):
+            limiatdown=self.speeddown/jmluser
         
-        limiatdown = self.speeddown/j
-        limiatup = self.speedup/j
+
+
+        limiatup = self.speedup/jmluser
         mgldown = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no"
         mglupl = "ip firewall mangle add chain=forward src-address=192.168.1.0/24 action=mark-packet new-packet-mark=upl_user passthrough=no"
-        pcqdown="queue type add name=pcq_down kind=pcq pcq-classifier=dst-address,dst-port"
-        pcqupl="queue type add name=pcq_upl kind=pcq pcq-classifier=src-address,src-port"
-        qtdown="queue tree add name=download parent=ether3 max-limit={}k".format(self.speeddown)
-        qtdownc="userdown parent=download packet-mark=down_user queue=pcq_down limit-at=500k max-limit=1000k".format(self.speedup)
-        qtupl="queue tree add name=upload parent=ether1 max-limit=500k"
-        qtuplc="userupl parent=upload packet-mark=upl_user queue=pcq_upl limit-at=250k max-limit=500k"
+        pcqdown = "queue type add name=pcq_down kind=pcq pcq-classifier=dst-address,dst-port"
+        pcqupl = "queue type add name=pcq_upl kind=pcq pcq-classifier=src-address,src-port"
+        qtdown = "queue tree add name=download parent=ether3 max-limit={}k".format(self.speeddown)
+        qtdownc = "userdown parent=download packet-mark=down_user queue=pcq_down limit-at={}k max-limit={}k".format(limiatdown,self.speedup)
+        qtupl = "queue tree add name=upload parent=ether1 max-limit={}k".format(self.speedup)
+        qtuplc = "userupl parent=upload packet-mark=upl_user queue=pcq_upl limit-at={}k max-limit={}k".format(limiatup,self.speedup)
         try:
             # stdin, stdout, stderr = self.connectssh().exec_command(
             # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
-            command = "queue type add name=pcqdown kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcqup kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown \n".format(
-                self.speeddown, self.speedup)
+            command = mgldown,"\n",mglupl,"\n",pcqdown,"\n",pcqupl,"\n",qtdown,"\n",qtdownc,"\n",qtupl,"\n",qtuplc,"\n",
             stdin, stdout, stderr = self.connectssh().exec_command(command)
             time.sleep(1)
         except paramiko.AuthenticationException:

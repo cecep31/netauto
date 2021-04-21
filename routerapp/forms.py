@@ -39,7 +39,7 @@ class Manualform(ModelForm):
         }
 
 class auto2Form(forms.Form):
-    kecepatan = forms.CharField(widget=forms.TextInput({'class':'form-control', 'placeholder': 'dalam kilobyte / boleh juga kosongkan'}),label="kecepatan minimum",max_length=50, required=False)
+    limitat = forms.CharField(widget=forms.TextInput({'class':'form-control', 'placeholder': 'dalam kilobyte / boleh juga kosongkan'}),label="kecepatan minimum",max_length=50, required=False)
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput({'class':'form-control'}))
