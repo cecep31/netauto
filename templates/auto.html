@@ -1,7 +1,7 @@
   {% load static %}
  {% for auto1 in auto1 %}
        <div class="col-sm-6 ">
-         <div class="card shadow">
+         <div class="card shadow-sm">
            <div class="card-body">
              <h5 class="card-title text-danger">{{auto1.nama}}</h5>
              <p class="card-text">{{auto1.deskripsi|truncatechars:180}}</p>
@@ -13,7 +13,7 @@
         
         {% for auto2 in auto2 %}
         <div class="col-sm-6 ">
-          <div class="card shadow">
+          <div class="card shadow-sm">
             <div class="card-body">
               <h5 class="card-title text-danger">{{auto2.nama}}</h5>
               <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
