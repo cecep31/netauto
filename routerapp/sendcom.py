@@ -57,30 +57,11 @@ class Remote:
         else:
             return "berhasil di set"
 
-    def addmangel(self, host):
-
-        pass
-
-    def autocon2(self, limitatdown=0):
-        jmluser = self.scanip("192.168.1.0")
-        if (limitatdown == 0):
-            limiatdown=self.speeddown/jmluser
-        
-
-
-        limiatup = self.speedup/jmluser
-        mgldown = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no"
-        mglupl = "ip firewall mangle add chain=forward src-address=192.168.1.0/24 action=mark-packet new-packet-mark=upl_user passthrough=no"
-        pcqdown = "queue type add name=pcq_down kind=pcq pcq-classifier=dst-address,dst-port"
-        pcqupl = "queue type add name=pcq_upl kind=pcq pcq-classifier=src-address,src-port"
-        qtdown = "queue tree add name=download parent=ether3 max-limit={}k".format(self.speeddown)
-        qtdownc = "userdown parent=download packet-mark=down_user queue=pcq_down limit-at={}k max-limit={}k".format(limiatdown,self.speedup)
-        qtupl = "queue tree add name=upload parent=ether1 max-limit={}k".format(self.speedup)
-        qtuplc = "userupl parent=upload packet-mark=upl_user queue=pcq_upl limit-at={}k max-limit={}k".format(limiatup,self.speedup)
+    def addmangel(self):
         try:
-            # stdin, stdout, stderr = self.connectssh().exec_command(
-            # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
-            command = mgldown,"\n",mglupl,"\n",pcqdown,"\n",pcqupl,"\n",qtdown,"\n",qtdownc,"\n",qtupl,"\n",qtuplc,"\n",
+            mgldown = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no"
+            mglupl = "ip firewall mangle add chain=forward src-address=192.168.1.0/24 action=mark-packet new-packet-mark=upl_user passthrough=no"
+            command = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no \n ip firewall mangle add chain=forward src-address=192.168.1.0/24 action=mark-packet new-packet-mark=upl_user passthrough=no"
             stdin, stdout, stderr = self.connectssh().exec_command(command)
             time.sleep(1)
         except paramiko.AuthenticationException:
@@ -91,11 +72,30 @@ class Remote:
             return "Proses gagal roueter tidak terhubung"
         except TimeoutError:
             return "Proses gagal karena router tidak menangapi"
-
-        if "already" in stdout.read().decode("ascii"):
+        outnya = stdout.read().decode("ascii")
+        if "already" in outnya:
             return "Sudah Di Set sebelumnya"
         else:
-            return "berhasil di set"
+            return outnya
+
+    def tampunganauto2(self):
+        mgldown = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no"
+        mglupl = "ip firewall mangle add chain=forward src-address=192.168.1.0/24 action=mark-packet new-packet-mark=upl_user passthrough=no"
+        pcqdown = "queue type add name=pcq_down kind=pcq pcq-classifier=dst-address,dst-port"
+        pcqupl = "queue type add name=pcq_upl kind=pcq pcq-classifier=src-address,src-port"
+        qtdown = "queue tree add name=download parent=ether3 max-limit={}k".format(self.speeddown)
+        qtdownc = "userdown parent=download packet-mark=down_user queue=pcq_down limit-at={}k max-limit={}k".format(limitatdown,self.speedup)
+        qtupl = "queue tree add name=upload parent=ether1 max-limit={}k".format(self.speedup)
+        qtuplc = "userupl parent=upload packet-mark=upl_user queue=pcq_upl limit-at={}k max-limit={}k".format(limiatup,self.speedup)
+    
+    def autocon2(self, limitatdown):
+        limitatd=int(limitatdown)
+        limiatup = (limitatd/self.speeddown)*self.speedup
+        
+        self.addmangel()
+
+        return 
+        
 
     def command(self, command):
         try:

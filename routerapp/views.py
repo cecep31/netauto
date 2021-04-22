@@ -175,8 +175,11 @@ def auto2(request, id):
         
         send = sendcom.Remote(host, user, passw, speeddown,speedup)
         v = send.autocon2(limitat)
+
+        messages.success(request, v)
+        return redirect("show")
     else:
-        redirect("show")
+        return redirect("show")
         
 
 
