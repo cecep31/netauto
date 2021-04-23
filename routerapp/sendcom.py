@@ -89,8 +89,11 @@ class Remote:
         qtuplc = "userupl parent=upload packet-mark=upl_user queue=pcq_upl limit-at={}k max-limit={}k".format(limiatup,self.speedup)
     
     def autocon2(self, limitatdown):
-        limitatd=int(limitatdown)
-        limiatup = (limitatd/self.speeddown)*self.speedup
+        if limitatdown is not "":
+            limitd=int(limitatdown)
+        else:
+            limitd=1
+        limiatup = (limitd/self.speeddown)*self.speedup
         
         self.addmangel()
 
