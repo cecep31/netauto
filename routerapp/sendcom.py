@@ -39,7 +39,7 @@ class Remote:
         try:
             # stdin, stdout, stderr = self.connectssh().exec_command(
             # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
-            command = "queue type add name=pcqdown kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcqup kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown \n".format(
+            command = "queue type add name=pcq_down kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcq_upl kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown \n".format(
                 self.speeddown, self.speedup)
             stdin, stdout, stderr = self.connectssh().exec_command(command)
             time.sleep(1)
@@ -146,8 +146,17 @@ class Routerapi:
         self.user=user
         self.passwd=passwd
     
+    def connecapi(self):
+        connection = routeros_api.RouterOsApiPool(self.host, username=self.user, password=self.passwd, plaintext_login=True)
+        api = connection.get_api()
+        return api
+
     def manglescan(self):
-        pass
+        api = self.connecapi()
+        listmangle=api.get_resource('ip/firewall/mangle')
+        showmangle=listmangle.get()
+        
+        return json.dumps(showmangle)
 
 def show_ip(ip_add, username, password):
 

@@ -1,4 +1,4 @@
-from django.http.response import JsonResponse
+from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -172,12 +172,14 @@ def auto2(request, id):
 
     if request.method == 'POST':
         limitat = request.POST['limitat']
+        send = sendcom.Routerapi(host,user,passw)
+        coba=send.manglescan()
         
-        send = sendcom.Remote(host, user, passw, speeddown,speedup)
-        v = send.autocon2(limitat)
+        # send = sendcom.Remote(host, user, passw, speeddown,speedup)
+        #v = send.autocon2(limitat)
 
-        messages.success(request, v)
-        return redirect("show")
+        #messages.success(request, v)
+        return HttpResponse(coba)
     else:
         return redirect("show")
         
