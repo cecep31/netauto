@@ -77,6 +77,27 @@ class Remote:
             return "Sudah Di Set sebelumnya"
         else:
             return outnya
+    def pcqaddtree(self):
+        try:
+            pcqdown = "queue type add name=pcq_down kind=pcq pcq-classifier=dst-address,dst-port"
+            pcqupl = "queue type add name=pcq_upl kind=pcq pcq-classifier=src-address,src-port"
+            command = "queue type add name=pcq_down kind=pcq pcq-classifier=dst-address,dst-port \n queue type add name=pcq_upl kind=pcq pcq-classifier=src-address,src-port"
+            stdin, stdout, stderr = self.connectssh().exec_command(command)
+            time.sleep(1)
+
+        except paramiko.AuthenticationException:
+            return "Gagal untuk login pastikan username dan password benar"
+        except paramiko.BadHostKeyException:
+            return "Proses gagal roueter tidak terhubung"
+        except NoValidConnectionsError:
+            return "Proses gagal roueter tidak terhubung"
+        except TimeoutError:
+            return "Proses gagal karena router tidak menangapi"
+        outnya = stdout.read().decode("ascii")
+        if "already" in outnya:
+            return "Sudah Di Set sebelumnya"
+        else:
+            return outnya
 
     def tampunganauto2(self):
         mgldown = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no"
@@ -96,8 +117,10 @@ class Remote:
         limiatup = (limitd/self.speeddown)*self.speedup
         
         self.addmangel()
+        self.pcqaddtree()
 
-        return 
+
+        return "jalan mungkin"
         
 
     def command(self, command):
@@ -117,6 +140,14 @@ class Remote:
 
         return stdout.read().decode('ascii')
 
+class Routerapi:
+    def __init__(self, host, user, passwd):
+        self.host=host
+        self.user=user
+        self.passwd=passwd
+    
+    def manglescan(self):
+        pass
 
 def show_ip(ip_add, username, password):
 
