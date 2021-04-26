@@ -176,7 +176,6 @@ class Routerapi(Remote):
 
 
     def delmangle(self):
-        
         down=self.manglescan("down_user")
         up=self.manglescan("upl_user")
         if (down=="ok" and up=="ok"):
