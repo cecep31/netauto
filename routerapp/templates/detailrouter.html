@@ -13,7 +13,7 @@ Automations
     
     {% for router in router %}
     {{router.nama}} |
-    {{router.host}} sebagai 
+    {{router.host}} sebagai <strong> {{router.user}}</strong>
     <div class="float-end">
       <a class="btn btn-warning mr-4" href="{% url 'uprouter' router.id %}">Edit Router</a>
       <!-- Button trigger modal -->
@@ -43,7 +43,7 @@ Automations
       </div>
       {% comment %} modal {% endcomment %}
     </div> 
-    <strong> {{router.user}}</strong>
+    
     <div id="auto" class="row mt-4">
       {% include 'auto.html' %}
     </div>

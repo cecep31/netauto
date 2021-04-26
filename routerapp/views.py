@@ -172,8 +172,8 @@ def auto2(request, id):
 
     if request.method == 'POST':
         limitat = request.POST['limitat']
-        send = sendcom.Routerapi(host,user,passw)
-        coba=send.manglescan()
+        send = sendcom.Routerapi(host,user,passw,speeddown,speedup)
+        coba=send.delmangle()
         
         # send = sendcom.Remote(host, user, passw, speeddown,speedup)
         #v = send.autocon2(limitat)

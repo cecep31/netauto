@@ -1,5 +1,6 @@
 import paramiko
 import time
+from paramiko import ssh_exception
 import routeros_api
 import json
 from .models import Routerm
@@ -140,23 +141,63 @@ class Remote:
 
         return stdout.read().decode('ascii')
 
-class Routerapi:
-    def __init__(self, host, user, passwd):
-        self.host=host
-        self.user=user
-        self.passwd=passwd
+class Routerapi(Remote):
+    def __init__(self, host, user, passw, speeddown,speedup):
+        super().__init__(host,user,passw,speeddown,speedup)
     
     def connecapi(self):
-        connection = routeros_api.RouterOsApiPool(self.host, username=self.user, password=self.passwd, plaintext_login=True)
+        connection = routeros_api.RouterOsApiPool(self.host, username=self.user, password=self.passw, plaintext_login=True)
         api = connection.get_api()
         return api
 
-    def manglescan(self):
+    def manglescan(self,nama):
         api = self.connecapi()
         listmangle=api.get_resource('ip/firewall/mangle')
-        showmangle=listmangle.get()
+        showmangle=listmangle.get(new_packet_mark=nama)
+        try:
+            x=showmangle[0]["id"]
+            
+        except IndexError:
+            x="ok"
+       
+        return x
+    
+    def pcqscan(self,nama):
+        api = self.connecapi()
+        listmangle=api.get_resource('ip/queue/type')
+        showmangle=listmangle.get(name=nama)
+        try:
+            x=showmangle[0]["id"]
+            
+        except IndexError:
+            x="ok"
+       
+        return x
+
+
+    def delmangle(self):
         
-        return json.dumps(showmangle)
+        down=self.manglescan("down_user")
+        up=self.manglescan("upl_user")
+        if (down=="ok" and up=="ok"):
+            return
+        api = self.connecapi()
+
+        listr = api.get_resource('ip/firewall/mangle')
+        listr.remove(id=down)
+        listr.remove(id=up)
+
+    def delpcq(self):
+        down=self.manglescan("down_user")
+        up=self.manglescan("upl_user")
+        if (down=="ok" and up=="ok"):
+            return
+        api = self.connecapi()
+        listr = api.get_resource('ip/firewall/mangle')
+        listr.remove(id=down)
+        listr.remove(id=up)
+    
+
 
 def show_ip(ip_add, username, password):
 
