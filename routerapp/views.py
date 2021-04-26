@@ -174,9 +174,10 @@ def auto2(request, id):
         limitat = request.POST['limitat']
         send = sendcom.Routerapi(host,user,passw,speeddown,speedup)
         coba=send.delmangle()
+        coba=send.delpcq()
         
-        # send = sendcom.Remote(host, user, passw, speeddown,speedup)
-        #v = send.autocon2(limitat)
+        send = sendcom.Remote(host, user, passw, speeddown,speedup)
+        v = send.autocon2(limitat)
 
         #messages.success(request, v)
         return HttpResponse(coba)
