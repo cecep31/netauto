@@ -101,14 +101,15 @@ class Remote:
             return outnya
 
     def tampunganauto2(self):
-        mgldown = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no"
-        mglupl = "ip firewall mangle add chain=forward src-address=192.168.1.0/24 action=mark-packet new-packet-mark=upl_user passthrough=no"
-        pcqdown = "queue type add name=pcq_down kind=pcq pcq-classifier=dst-address,dst-port"
-        pcqupl = "queue type add name=pcq_upl kind=pcq pcq-classifier=src-address,src-port"
-        qtdown = "queue tree add name=download parent=ether3 max-limit={}k".format(self.speeddown)
-        qtdownc = "userdown parent=download packet-mark=down_user queue=pcq_down limit-at={}k max-limit={}k".format(limitatdown,self.speedup)
-        qtupl = "queue tree add name=upload parent=ether1 max-limit={}k".format(self.speedup)
-        qtuplc = "userupl parent=upload packet-mark=upl_user queue=pcq_upl limit-at={}k max-limit={}k".format(limiatup,self.speedup)
+        # mgldown = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no"
+        # mglupl = "ip firewall mangle add chain=forward src-address=192.168.1.0/24 action=mark-packet new-packet-mark=upl_user passthrough=no"
+        # pcqdown = "queue type add name=pcq_down kind=pcq pcq-classifier=dst-address,dst-port"
+        # pcqupl = "queue type add name=pcq_upl kind=pcq pcq-classifier=src-address,src-port"
+        # qtdown = "queue tree add name=download parent=ether3 max-limit={}k".format(self.speeddown)
+        # qtdownc = "userdown parent=download packet-mark=down_user queue=pcq_down limit-at={}k max-limit={}k".format(limitatdown,self.speedup)
+        # qtupl = "queue tree add name=upload parent=ether1 max-limit={}k".format(self.speedup)
+        # qtuplc = "userupl parent=upload packet-mark=upl_user queue=pcq_upl limit-at={}k max-limit={}k".format(limiatup,self.speedup)
+        pass
     
     def autocon2(self, limitatdown):
         if limitatdown is not "":
