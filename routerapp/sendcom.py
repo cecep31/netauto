@@ -164,7 +164,7 @@ class Routerapi(Remote):
     
     def pcqscan(self,nama):
         api = self.connecapi()
-        listmangle=api.get_resource('ip/queue/type')
+        listmangle=api.get_resource('queue/type')
         showmangle=listmangle.get(name=nama)
         try:
             x=showmangle[0]["id"]
@@ -174,6 +174,32 @@ class Routerapi(Remote):
        
         return x
 
+    def queuetreescan(self,name):
+        api = self.connecapi()
+        listmangle=api.get_resource('queue/tree')
+        showmangle=listmangle.get(name=name)
+        try:
+            x=showmangle[0]["id"]
+            
+        except IndexError:
+            x="ok"
+       
+        return x
+
+
+    def delqueuetree(self):
+        pdown=self.queuetreescan("download")
+        pup=self.queuetreescan("upload")
+        cdown=self.queuetreescan("userdown")
+        cup=self.queuetreescan("userupl")
+        if (pdown=="ok" and pup=="ok" and cdown=="ok" and cup=="ok"):
+            return
+        api = self.connecapi()
+        listr = api.get_resource('queue/tree')
+        listr.remove(id=pdown)
+        listr.remove(id=pup)
+        listr.remove(id=cdown)
+        listr.remove(id=cup)
 
     def delmangle(self):
         down=self.manglescan("down_user")
@@ -181,7 +207,6 @@ class Routerapi(Remote):
         if (down=="ok" and up=="ok"):
             return
         api = self.connecapi()
-
         listr = api.get_resource('ip/firewall/mangle')
         listr.remove(id=down)
         listr.remove(id=up)
@@ -192,11 +217,10 @@ class Routerapi(Remote):
         if (down=="ok" and up=="ok"):
             return
         api = self.connecapi()
-        listr = api.get_resource('ip/firewall/mangle')
+        listr = api.get_resource('queue/type')
         listr.remove(id=down)
         listr.remove(id=up)
     
-
 
 def show_ip(ip_add, username, password):
 
