@@ -142,6 +142,7 @@ class Remote:
 
         return stdout.read().decode('ascii')
 
+
 class Routerapi(Remote):
     def __init__(self, host, user, passw, speeddown,speedup):
         super().__init__(host,user,passw,speeddown,speedup)
@@ -187,6 +188,16 @@ class Routerapi(Remote):
        
         return x
 
+    def queuesimplescan(self,name):
+        api = self.connecapi()
+        listmangle=api.get_resource('queue/simple')
+        showmangle=listmangle.get(name=name)
+        try:
+            x=showmangle[0]["id"]
+            
+        except IndexError:
+            x="ok"
+        return x
 
     def delqueuetree(self):
         pdown=self.queuetreescan("download")
@@ -201,6 +212,15 @@ class Routerapi(Remote):
         listr.remove(id=pup)
         listr.remove(id=cdown)
         listr.remove(id=cup)
+
+    def delqueuesimple(self):
+        simple=self.queuesimplescan("download")
+        
+        if (simple=="ok"):
+            return
+        api = self.connecapi()
+        listr = api.get_resource('queue/simple')
+        listr.remove(id=simple)
 
     def delmangle(self):
         down=self.manglescan("down_user")
@@ -221,6 +241,13 @@ class Routerapi(Remote):
         listr = api.get_resource('queue/type')
         listr.remove(id=down)
         listr.remove(id=up)
+
+    def delallconfig(self):
+        self.delmangle()
+        self.delqueuetree()
+        self.delpcq()
+        self.delqueuesimple()
+        return
     
 
 def show_ip(ip_add, username, password):
