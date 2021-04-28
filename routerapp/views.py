@@ -172,16 +172,16 @@ def auto2(request, id):
 
     if request.method == 'POST':
         limitat = request.POST['limitat']
-        send = sendcom.Routerapi(host,user,passw,speeddown,speedup)
-        coba=send.delallconfig()
+        senddel = sendcom.Routerapi(host,user,passw,speeddown,speedup)
+        senddel.delallconfig()
         
         send1 = sendcom.Remote(host, user, passw, speeddown,speedup)
-        v = send.autocon2(limitat)
+        v = send1.autocon2(limitat)
 
-        #messages.success(request, v)
-        return HttpResponse(coba)
-    else:
+        messages.success(request, v)
+        # return HttpResponse(coba)
         return redirect("show")
+    
         
 
 
