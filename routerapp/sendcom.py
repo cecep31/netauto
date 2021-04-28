@@ -3,6 +3,8 @@ import time
 from paramiko import ssh_exception
 import routeros_api
 import json
+
+from routeros_api.api import RouterOsApi
 from .models import Routerm
 from paramiko.ssh_exception import NoValidConnectionsError
 
@@ -99,6 +101,30 @@ class Remote:
             return "Sudah Di Set sebelumnya"
         else:
             return outnya
+    
+    def queueddtree(self,limitdown,limitup):
+        try:
+            # qtdown = "queue tree add name=download parent=ether3 max-limit={}k".format(self.speeddown)
+            # qtdownc = "userdown parent=download packet-mark=down_user queue=pcq_down limit-at={}k max-limit={}k".format(limitatdown,self.speedup)
+            # qtupl = "queue tree add name=upload parent=ether1 max-limit={}k".format(self.speedup)
+            # qtuplc = "userupl parent=upload packet-mark=upl_user queue=pcq_upl limit-at={}k max-limit={}k".format(limiatup,self.speedup)
+            command = "queue tree add name=download parent=ether3 max-limit={}k \n queue tree add name=userdown parent=download packet-mark=down_user queue=pcq_down limit-at={}k max-limit={}k \n queue tree add name=upload parent=ether1 max-limit={}k \n queue tree add name=userupl parent=upload packet-mark=upl_user queue=pcq_upl limit-at={}k max-limit={}k".format(self.speeddown,limitdown,self.speeddown, self.speedup,limitup,self.speedup)
+            stdin, stdout, stderr = self.connectssh().exec_command(command)
+            time.sleep(1)
+
+        except paramiko.AuthenticationException:
+            return "Gagal untuk login pastikan username dan password benar"
+        except paramiko.BadHostKeyException:
+            return "Proses gagal roueter tidak terhubung"
+        except NoValidConnectionsError:
+            return "Proses gagal roueter tidak terhubung"
+        except TimeoutError:
+            return "Proses gagal karena router tidak menangapi"
+        outnya = stdout.read().decode("ascii")
+        if "already" in outnya:
+            return "Sudah Di Set sebelumnya"
+        else:
+            return "berhasil Automasi"
 
     def tampunganauto2(self):
         # mgldown = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no"
@@ -112,17 +138,19 @@ class Remote:
         pass
     
     def autocon2(self, limitatdown):
-        if limitatdown is not "":
+        if limitatdown != "":
             limitd=int(limitatdown)
         else:
             limitd=1
+
         limiatup = (limitd/self.speeddown)*self.speedup
         
         self.addmangel()
         self.pcqaddtree()
+        x=self.queueddtree(limitd,limiatup)
 
 
-        return "jalan mungkin"
+        return x
         
 
     def command(self, command):
@@ -243,7 +271,10 @@ class Routerapi(Remote):
         listr.remove(id=up)
 
     def delallconfig(self):
-        self.delmangle()
+        try: 
+            self.delmangle()
+        except:
+            return
         self.delqueuetree()
         self.delpcq()
         self.delqueuesimple()
