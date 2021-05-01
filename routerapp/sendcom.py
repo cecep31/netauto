@@ -124,7 +124,7 @@ class Remote:
         if "already" in outnya:
             return "Sudah Di Set sebelumnya"
         else:
-            return "berhasil Automasi"
+            return "Berhasil di aktifkan/diperbarui"
 
     def tampunganauto2(self):
         # mgldown = "ip firewall mangle add chain=forward dst-address=192.168.1.0/24 action=mark-packet new-packet-mark=down_user passthrough=no"
