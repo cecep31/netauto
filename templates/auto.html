@@ -5,7 +5,8 @@
            <div class="card-body">
              <h5 class="card-title text-danger">{{auto1.nama}}</h5>
              <p class="card-text">{{auto1.deskripsi|truncatechars:180}}</p>
-             <a href="{% url 'urlauto1' router.id %}" class="btn btn-primary rounded-pill">Kirim Langsung</a>
+             <a href="{% url 'urlauto1' router.id %}" class="btn btn-primary rounded-pill">Config Sekarang</a>
+             <a href="{% url 'urlauto1' router.id %}" class="btn btn-danger rounded-pill">Hapus Config</a>
             </div>
           </div>
         </div>
