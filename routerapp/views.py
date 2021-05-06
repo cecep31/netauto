@@ -152,6 +152,10 @@ def auto1(request, id):
 
     send = sendcom.Remote(host, user, passw, speeddown,speedup)
     v = send.autocon1()
+    if "berhasil" in v:
+        return "Sudah fDi Set sebelumnya"
+    else:
+        return "berhasil di set"
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
