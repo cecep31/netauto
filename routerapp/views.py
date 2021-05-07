@@ -120,25 +120,6 @@ def detailrouter(request, id):
     return render(request, 'detailrouter.html', context)
 
 
-@login_required(login_url=settings.LOGIN_URL)
-def apiip(request):
-    host = "192.168.31.1"
-
-    conn = routeros_api.RouterOsApiPool(
-        host, username="admin", password="", plaintext_login=True)
-    api = conn.get_api()
-
-    list_ip = api.get_resource('ip/address')
-    show_ip = list_ip.get()
-
-    data = json.dumps(show_ip, indent=3)
-    conn.disconnect()
-    d = json.loads(data)
-    context = {
-        'data': d,
-    }
-    return render(request, 'coba.html', context)
-
 
 @login_required(login_url=settings.LOGIN_URL)
 def auto1(request, id):
