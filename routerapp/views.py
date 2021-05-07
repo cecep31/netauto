@@ -1,14 +1,12 @@
-from django.http.response import HttpResponse, JsonResponse
+from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Contohmodel, Routerm, Automation
+from .models import Contohmodel, Routerm, Automation, Automationon
 from .forms import Formcontoh, RoutermForm, auto2Form, LoginForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from . import sendcom
-import json
-import routeros_api
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
 
@@ -134,9 +132,11 @@ def auto1(request, id):
     send = sendcom.Remote(host, user, passw, speeddown,speedup)
     v = send.autocon1()
     if "berhasil" in v:
-        return "Sudah fDi Set sebelumnya"
-    else:
-        return "berhasil di set"
+        autox=Automation.objects.filter(autokey='auto1')
+        for u in autox:
+            iu = u.id
+        a=Automationon(auto=iu, router=id) 
+        a.save()
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()

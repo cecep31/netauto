@@ -1,10 +1,7 @@
 import paramiko
 import time
-from paramiko import ssh_exception
 import routeros_api
 import json
-
-from routeros_api.api import RouterOsApi
 from .models import Routerm
 from paramiko.ssh_exception import NoValidConnectionsError
 
@@ -42,8 +39,7 @@ class Remote:
         try:
             # stdin, stdout, stderr = self.connectssh().exec_command(
             # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
-            command = "queue type add name=pcq_down kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcq_upl kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcqup/pcqdown \n".format(
-                self.speeddown, self.speedup)
+            command = "queue type add name=pcq_down kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcq_upl kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcq_upl/pcq_down \n".format(self.speeddown, self.speedup)
             stdin, stdout, stderr = self.connectssh().exec_command(command)
             time.sleep(1)
         except paramiko.AuthenticationException:

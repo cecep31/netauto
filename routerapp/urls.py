@@ -1,8 +1,7 @@
-from django.contrib.auth.views import LoginView,LogoutView
-from django.forms import widgets
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 from . import views
-from .forms import LoginForm
+
 
 urlpatterns = [
     path('command',views.manualcommand, name='manual'),
