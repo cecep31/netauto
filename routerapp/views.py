@@ -135,7 +135,7 @@ def auto1(request, id):
         autox=Automation.objects.filter(autokey='auto1')
         for u in autox:
             iu = u.id
-        a=Automationon(auto=iu, router=id) 
+        a=Automationon.objects.create(auto=autox, router=id) 
         a.save()
 
     # send = sendcom.Remote(host, user, passw, speed)
@@ -143,6 +143,18 @@ def auto1(request, id):
     messages.success(request, v)
     return redirect('router', id)
     # return HttpResponseRedirect(reverse('show'))
+
+@login_required(login_url=settings.LOGIN_URL)
+def delauto1(request, id):
+    for i in Routerm.objects.filter(id=id):
+        user = i.user
+        passw = i.password
+        host = i.host
+        speeddown = i.kecepatan_download
+        speedup = i.kecepatan_upload
+    senddel = sendcom.Routerapi(host,user,passw,speeddown,speedup)
+    senddel.deljustauto1()
+    return redirect('router', id)
 
 
 @login_required(login_url=settings.LOGIN_URL)

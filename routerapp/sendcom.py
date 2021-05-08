@@ -238,7 +238,7 @@ class Routerapi(Remote):
         listr.remove(id=cup)
 
     def delqueuesimple(self):
-        simple=self.queuesimplescan("download")
+        simple=self.queuesimplescan("pcq1")
         
         if (simple=="ok"):
             return
@@ -257,8 +257,8 @@ class Routerapi(Remote):
         listr.remove(id=up)
 
     def delpcq(self):
-        down=self.manglescan("down_user")
-        up=self.manglescan("upl_user")
+        down=self.pcqscan("pcq_down")
+        up=self.pcqscan("pcq_upl")
         if (down=="ok" and up=="ok"):
             return
         api = self.connecapi()
@@ -275,6 +275,11 @@ class Routerapi(Remote):
         self.delpcq()
         self.delqueuesimple()
         return
+
+    def deljustauto1(self):
+        self.delpcq()
+        self.delqueuesimple()
+
     
 
 def show_ip(ip_add, username, password):
