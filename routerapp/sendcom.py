@@ -39,7 +39,7 @@ class Remote:
         try:
             # stdin, stdout, stderr = self.connectssh().exec_command(
             # "queue simple add target=ether2 name=pcq1 queue=pcq-upload-default/pcq-download-default")
-            command = "queue type add name=pcq_down kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcq_upl kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether2 name=pcq1 queue=pcq_upl/pcq_down \n".format(self.speeddown, self.speedup)
+            command = "queue type add name=pcq_down kind=pcq pcq-rate={}k pcq-classifier=dst-address \n queue type add name=pcq_upl kind=pcq pcq-rate={}k pcq-classifier=src-address \n queue simple add target=ether3 name=pcq1 queue=pcq_upl/pcq_down \n".format(self.speeddown, self.speedup)
             stdin, stdout, stderr = self.connectssh().exec_command(command)
             time.sleep(1)
         except paramiko.AuthenticationException:
@@ -277,8 +277,19 @@ class Routerapi(Remote):
         return
 
     def deljustauto1(self):
-        self.delpcq()
+        try: 
+            self.delpcq()
+        except:
+            return
         self.delqueuesimple()
+    
+    def deljustauto2(self):
+        try: 
+            self.delmangle()
+        except:
+            return
+        self.delpcq()
+        self.delqueuetree()
 
     
 

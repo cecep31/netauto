@@ -153,6 +153,8 @@ def delauto1(request, id):
         speedup = i.kecepatan_upload
     senddel = sendcom.Routerapi(host,user,passw,speeddown,speedup)
     senddel.deljustauto1()
+    autonx = Automationon.objects.filter(auto=1, router=id)
+    autonx.delete()
     return redirect('router', id)
 
 
@@ -184,6 +186,20 @@ def auto2(request, id):
 
     # send = sendcom.Remote(host, user, passw, speed)
     # v=send.scanip()
+
+@login_required(login_url=settings.LOGIN_URL)
+def delauto2(request, id):
+    for i in Routerm.objects.filter(id=id):
+        user = i.user
+        passw = i.password
+        host = i.host
+        speeddown = i.kecepatan_download
+        speedup = i.kecepatan_upload
+    senddel = sendcom.Routerapi(host,user,passw,speeddown,speedup)
+    senddel.deljustauto2()
+    autonx = Automationon.objects.filter(auto=2, router=id)
+    autonx.delete()
+    return redirect('router', id)
 
 @login_required(login_url=settings.LOGIN_URL)
 def autosettingview1(request, router, id):
