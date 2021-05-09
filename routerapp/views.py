@@ -132,7 +132,7 @@ def auto1(request, id):
     send = sendcom.Remote(host, user, passw, speeddown,speedup)
     v = send.autocon1()
     if "berhasil" in v:
-        autox=Automation.objects.get(autokey='auto1')
+        autox=Automation.objects.get(pk=1)
         for u in autox:
             iu = u.id
         a=Automationon.objects.create(auto=autox, router=id) 
