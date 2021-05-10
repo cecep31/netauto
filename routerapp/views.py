@@ -103,6 +103,8 @@ def delrouter(request, idr):
 def detailrouter(request, id):
     auto1 = Automation.objects.filter(autokey="auto1")
     auto2 = Automation.objects.filter(autokey="auto2")
+    nyala1 = Automationon.objects.filter(auto=1, router=id)
+    nyala2 = Automationon.objects.filter(auto=2, router=id)
     routerside = Routerm.objects.all()
     idk = id
     router = Routerm.objects.filter(pk=id)
@@ -113,7 +115,9 @@ def detailrouter(request, id):
         'router': router,
         'routerside': routerside,
         'idk': idk,
-        'auto2form':auto2form
+        'auto2form':auto2form,
+        'nyala1':nyala1,
+        'nyala2':nyala2
     }
     return render(request, 'detailrouter.html', context)
 
@@ -211,7 +215,6 @@ def autosettingview1(request, router, id):
     }
 
     return render(request, 'autosettingview.html', context)
-
 
 
 @login_required(login_url=settings.LOGIN_URL)
