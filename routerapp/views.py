@@ -179,6 +179,11 @@ def auto2(request, id):
         
         send1 = sendcom.Remote(host, user, passw, speeddown,speedup)
         v = send1.autocon2(limitat)
+        if "berhasil" in v:
+            routerx=Routerm.objects.get(pk=id)
+            autox=Automation.objects.get(pk=2)
+            a=Automationon.objects.create(auto=autox, router=routerx) 
+            a.save()
 
         messages.success(request, v)
         # return HttpResponse(coba)
