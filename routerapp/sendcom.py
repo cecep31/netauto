@@ -280,14 +280,14 @@ class Routerapi(Remote):
         try: 
             self.delpcq()
         except:
-            return
+            return "gagal"
         self.delqueuesimple()
     
     def deljustauto2(self):
         try: 
             self.delmangle()
         except:
-            return
+            return "gagal"
         self.delpcq()
         self.delqueuetree()
 

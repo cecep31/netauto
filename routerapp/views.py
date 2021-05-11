@@ -156,7 +156,10 @@ def delauto1(request, id):
         speeddown = i.kecepatan_download
         speedup = i.kecepatan_upload
     senddel = sendcom.Routerapi(host,user,passw,speeddown,speedup)
-    senddel.deljustauto1()
+    result=senddel.deljustauto1()
+    if "gagal" in result:
+        messages.error(request, "gagal")
+        return redirect('router', id)
     autonx = Automationon.objects.filter(auto=1, router=id)
     autonx.delete()
     return redirect('router', id)
