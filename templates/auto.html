@@ -42,7 +42,7 @@
                 </form>
               </div>
               <button id="auto2" class="btn btn-info rounded-pill">Setting <img src="{% static 'icons/autodown.svg' %}" alt=""></button>
-              {% if nyala2 %}<a href="{% url 'delauto2url' router.id %}" class="btn btn-danger rounded-pill">Hapus Config</a>{% endif %}
+              {% if nyala2 %}<a href="{% url 'delauto2url' router.id %}" id="hapus2" class="btn btn-danger rounded-pill">Hapus Config</a>{% endif %}
               
               <!-- <a href="{% url 'autosetting1' router.id 1 %}" class="btn btn-primary rounded-pill">Go somewhere</a> -->
             </div>

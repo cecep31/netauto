@@ -1,3 +1,4 @@
+from django.db import router
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -23,6 +24,8 @@ def show_ip(request):
 def homepage(request):
     auto1 = Automation.objects.filter(autokey="auto1")
     auto2 = Automation.objects.filter(autokey="auto2")
+    nyala1 = Automationon.objects.filter(auto=1)[:1]
+    nyala2 = Automationon.objects.filter(auto=2)[:1]
     routerside = Routerm.objects.all()
     auto2form=auto2Form
     router = Routerm.objects.all()[:1]
@@ -31,7 +34,9 @@ def homepage(request):
         'auto2': auto2,
         'router':router,
         'routerside': routerside,
-        'auto2form':auto2form
+        'auto2form':auto2form,
+        'nyala1':nyala1,
+        'nyala2':nyala2
     }
     return render(request, "home.html", context)
 
@@ -133,6 +138,9 @@ def auto1(request, id):
         speeddown = i.kecepatan_download
         speedup = i.kecepatan_upload
 
+    if Automationon.objects.filter(auto=2, router=id):
+        messages.error(request,"Gagal karena automation simple dan akurat aktif")
+        return redirect("router", id)
     send = sendcom.Remote(host, user, passw, speeddown,speedup)
     v = send.autocon1()
     if "berhasil" in v:
@@ -157,11 +165,12 @@ def delauto1(request, id):
         speedup = i.kecepatan_upload
     senddel = sendcom.Routerapi(host,user,passw,speeddown,speedup)
     result=senddel.deljustauto1()
-    if "gagal" in result:
-        messages.error(request, "gagal")
+    if result==False:
+        messages.error(request, "Gagal menghapus")
         return redirect('router', id)
     autonx = Automationon.objects.filter(auto=1, router=id)
     autonx.delete()
+    messages.success(request, "Berhasil menghapus")
     return redirect('router', id)
 
 
@@ -180,9 +189,12 @@ def auto2(request, id):
         senddel = sendcom.Routerapi(host,user,passw,speeddown,speedup)
         senddel.delallconfig()
         
+        if Automationon.objects.filter(auto=1, router=id):
+            messages.error(request,"Gagal karena automation simple bandwidth aktif")
+            return redirect("router", id)
         send1 = sendcom.Remote(host, user, passw, speeddown,speedup)
         v = send1.autocon2(limitat)
-        if "berhasil" in v:
+        if "Berhasil" in v:
             routerx=Routerm.objects.get(pk=id)
             autox=Automation.objects.get(pk=2)
             a=Automationon.objects.create(auto=autox, router=routerx) 
@@ -190,7 +202,7 @@ def auto2(request, id):
 
         messages.success(request, v)
         # return HttpResponse(coba)
-        return redirect("show")
+        return redirect("router",id)
     
         
 
@@ -208,9 +220,13 @@ def delauto2(request, id):
         speeddown = i.kecepatan_download
         speedup = i.kecepatan_upload
     senddel = sendcom.Routerapi(host,user,passw,speeddown,speedup)
-    senddel.deljustauto2()
+    result=senddel.deljustauto2()
+    if result==False:
+        messages.error(request, "Gagal menghapus")
+        return redirect('router', id)
     autonx = Automationon.objects.filter(auto=2, router=id)
     autonx.delete()
+    messages.success(request,"Berhasil menghapus")
     return redirect('router', id)
 
 @login_required(login_url=settings.LOGIN_URL)

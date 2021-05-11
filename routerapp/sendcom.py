@@ -197,7 +197,6 @@ class Routerapi(Remote):
             
         except IndexError:
             x="ok"
-       
         return x
 
     def queuetreescan(self,name):
@@ -280,16 +279,18 @@ class Routerapi(Remote):
         try: 
             self.delpcq()
         except:
-            return "gagal"
+            return False
         self.delqueuesimple()
+        return True
     
     def deljustauto2(self):
         try: 
             self.delmangle()
         except:
-            return "gagal"
+            return False
         self.delpcq()
         self.delqueuetree()
+        return True
 
     
 
