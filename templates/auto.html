@@ -5,7 +5,7 @@
            <div class="card-body">
              <h5 class="card-title text-danger">{{auto1.nama}}
               {% if nyala1 %}
-                <font style="color: green; margin-left: 5px;">(Active)</font>
+                <font style="color: green; margin-left: 5px;">(Aktif)</font>
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check" viewBox="0 0 16 16">
                   <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
                 </svg>
@@ -24,7 +24,7 @@
             <div class="card-body">
               <h5 class="card-title text-danger">{{auto2.nama}}
                 {% if nyala2 %}
-                <font style="color: green; margin-left: 5px;">(Active)</font>
+                <font style="color: green; margin-left: 5px;">(Aktif)</font>
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green" class="bi bi-check" viewBox="0 0 16 16">
                   <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
                 </svg>
@@ -32,7 +32,9 @@
               </h5>
               
               <p class="card-text">{{auto2.deskripsi|truncatechars:180}}</p>
-              <div  style="display: none;" id="auto2form">
+              
+              <div style="display: none;" id="auto2form">
+                <div>Kecepatan maksimalnya : <font class="text-danger">{{router.kecepatan_download}} kb/s</font></div>
                 <form action="{% url 'urlauto2' router.id %}" method="post">
                   {% csrf_token %}
                   {{auto2form}}
