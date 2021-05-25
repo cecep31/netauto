@@ -3,13 +3,14 @@ from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Contohmodel, Routerm, Automation, Automationon
+from .models import Contohmodel, Routerm, Automation, Automationon, Configlog
 from .forms import Formcontoh, RoutermForm, auto2Form, LoginForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from . import sendcom
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -257,6 +258,7 @@ def manualcommand(request):
     }
     return render(request, 'manualc.html', context)
 
+
 @login_required(login_url=settings.LOGIN_URL)
 def manualcommandajax(request):
     from .forms import Manualform
@@ -276,6 +278,15 @@ def manualcommandajax(request):
                 outnya=comen.command(command)
 
                 return JsonResponse(data={"data": outnya}, status=200)
+
+@csrf_exempt
+def configlog(request, keyword):
+    if request.method == 'POST':
+        request.POST['keyword']
+        return render(request,'searchlog')
+    else:
+        data = Configlog.objects.filter()
+        return JsonResponse(data={"data":data}, status=200)
 
 def loginya(request):
     if request.method == 'POST':

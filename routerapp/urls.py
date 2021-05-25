@@ -17,6 +17,7 @@ urlpatterns = [
     path('updaterouter/<int:idr>',views.updaterouter,name='uprouter'),
     path('commandajax',views.manualcommandajax, name='manualajax'),
     path('delauto1/<int:id>',views.delauto1, name='delauto1url'),
-    path('delauto2/<int:id>',views.delauto2, name='delauto2url')
+    path('delauto2/<int:id>',views.delauto2, name='delauto2url'),
+    path('configlog',views.configlog, name='configlogurl')
     
 ]

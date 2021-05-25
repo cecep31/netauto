@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
   <script src="{% static 'js/jquery.js' %}"></script>
   <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
   <title>{% block title %} {% endblock title %}</title>
 
@@ -28,8 +30,12 @@
       data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <input class="form-control form-control-dark w-100 rounded-0" type="text" placeholder="Search"
-      aria-label="Search" />
+    <form class="form-control" action="{% url 'searchurl' %}">
+
+      <input id="searhid" class="form-control form-control-dark w-100 rounded-0" type="text" placeholder="Search"
+        aria-label="Search" />
+      <button style="display: none;" type="submit">sss</button>
+    </form>
 
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap ">
@@ -169,7 +175,12 @@
         $("#auto2").show(300);
         $('#hapus2').show(300);
       });
+      $("#searhid").bind("enterKey",function(){
+        //do stuff here
+     });
     });
+
+    
   </script>
 
   

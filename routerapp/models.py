@@ -1,4 +1,4 @@
-from enum import unique
+from enum import auto, unique
 from django.db import models
 
 # Create your models here.
@@ -50,6 +50,12 @@ class Manualcommand(models.Model):
 class Automationon(models.Model):
     auto = models.ForeignKey(Automation, on_delete=models.CASCADE)
     router = models.ForeignKey(Routerm, on_delete=models.CASCADE)
+    create_at = models.DateTimeField(auto_now=True)
+
+class Configlog(models.Model):
+    auto = models.ForeignKey(Automation, on_delete=models.CASCADE)
+    router = models.ForeignKey(Routerm, on_delete=models.CASCADE)
+    ouput = models.TextField(max_length=200)
     create_at = models.DateTimeField(auto_now=True)
     
 
