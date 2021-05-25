@@ -280,9 +280,10 @@ def manualcommandajax(request):
                 return JsonResponse(data={"data": outnya}, status=200)
 
 @csrf_exempt
-def configlog(request, keyword):
+def configlog(request):
     if request.method == 'POST':
         request.POST['keyword']
+        data = Configlog.objects.filter()
         return render(request,'searchlog')
     else:
         data = Configlog.objects.filter()
