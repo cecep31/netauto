@@ -32,6 +32,21 @@
 
 <script>
   $(document).ready(function () {
+    
+    $( function() {
+      var availableTags = [
+        "ip address print",
+        "ip firewall magle print",
+        "ls",
+        "queue simple print",
+        "queue tree print",
+        "queue type print",
+        "system reboot"
+      ];
+      $("#id_command").autocomplete({
+        source: availableTags
+      });
+    } );
     $("#kirimc").click(function () {
       $("#textnya").text("Loading...");
       $("#loading").show('fast');
