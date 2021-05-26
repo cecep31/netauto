@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Contohmodel, Configlog, Routerm, Automation, Automationon
+from .models import Contohmodel, Manualcommand, Routerm, Automation, Automationon
 
 # Register your models here.
 @admin.register(Contohmodel)
@@ -21,7 +21,7 @@ class AutomationonAdmin(admin.ModelAdmin):
 class AutomationAdmin(admin.ModelAdmin):
     list_display= ('autokey', 'nama')
 
-@admin.register(Configlog)
+@admin.register(Manualcommand)
 class manualAdmin(admin.ModelAdmin):
     list_display= ['host']
 

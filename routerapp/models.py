@@ -40,7 +40,7 @@ class Confrouter(models.Model):
         return self.nama
 
 
-class Configlog(models.Model):
+class Manualcommand(models.Model):
     host = models.ForeignKey(Routerm, on_delete=models.CASCADE)
     command = models.CharField(max_length=255)
     output = models.TextField(blank=True)

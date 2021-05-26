@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.forms.widgets import Select, TextInput, Textarea
-from .models import Contohmodel, Routerm, Configlog
+from .models import Contohmodel, Manualcommand, Routerm, Configlog
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -30,7 +30,7 @@ class RoutermForm(ModelForm):
 class Manualform(ModelForm):
 
     class Meta:
-        model = Configlog
+        model = Manualcommand
         fields = ['host', 'command', 'output']
         widgets = {
             'host': Select({'class': 'form-control'}),
