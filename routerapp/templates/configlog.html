@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %} Config Log {% endblock title %} 
+{% block judul %} History Config {% endblock judul %} 
+{% block content %}
+
+
+<ol class="list-group list-group-numbered">
+  {% for log in log %}
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">{{log.host}}</div>
+      Command : {{log.command}}
+    </div>
+    <textarea class="rounded-1 bg-dark p-2 text-white-50" name="" id="" cols="50" rows="5">{{log.output}}</textarea>
+  </li>
+  {% endfor %}
+</ol>
+
+
+{% endblock content %} {% block routerside %} 
+{% for router in routerside|slice:":1"%}
+   {% include 'routerside.html' %}
+ {% endfor %} {% endblock routerside %}

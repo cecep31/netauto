@@ -32,9 +32,9 @@
       data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <form class="form-control p-0" action="{% url 'configlogurl' %}">
+    <form class="form-control p-0" method="POST" action="{% url 'configlogurl' %}">
 
-      <input id="searhid" class="form-control form-control-dark w-100 rounded-0" type="text" placeholder="Search"
+      <input id="searhid" name="keyword" class="form-control form-control-dark w-100 rounded-0" type="text" placeholder="Search"
         aria-label="Search" />
       <button style="display: none;" type="submit">sss</button>
     </form>

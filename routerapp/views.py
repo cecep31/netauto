@@ -1,9 +1,10 @@
 from django.db import router
+from django.db.models.query_utils import Q
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Contohmodel, Routerm, Automation, Automationon, Configlog
+from .models import Contohmodel, Routerm, Automation, Automationon, Configlog, Manualcommand
 from .forms import Formcontoh, RoutermForm, auto2Form, LoginForm
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -142,6 +143,7 @@ def auto1(request, id):
     if Automationon.objects.filter(auto=2, router=id):
         messages.error(request,"Gagal karena automation simple dan akurat aktif")
         return redirect("router", id)
+
     send = sendcom.Remote(host, user, passw, speeddown,speedup)
     v = send.autocon1()
     if "berhasil" in v:
@@ -281,13 +283,22 @@ def manualcommandajax(request):
 
 @csrf_exempt
 def configlog(request):
+    routerside = Routerm.objects.all()
     if request.method == 'POST':
-        request.POST['keyword']
-        data = Configlog.objects.filter()
-        return render(request,'searchlog')
+        keyword=request.POST['keyword']
+        data = Manualcommand.objects.filter(Q(command__contains=keyword)|Q(output__contains=keyword))
+        context = {
+            "log" : data,
+            'routerside': routerside 
+        }
+        return render(request,'configlog.html', context)
     else:
-        data = Configlog.objects.filter()
-        return JsonResponse(data={"data":data}, status=200)
+        data = Manualcommand.objects.all()
+        context = {
+            "log" : data,
+            'routerside': routerside 
+        }
+        return render(request,'confglog.html', context)
 
 def loginya(request):
     if request.method == 'POST':

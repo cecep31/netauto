@@ -53,8 +53,8 @@ class Automationon(models.Model):
     create_at = models.DateTimeField(auto_now=True)
 
 class Configlog(models.Model):
-    auto = models.ForeignKey(Automation, on_delete=models.CASCADE)
-    router = models.ForeignKey(Routerm, on_delete=models.CASCADE)
+    router = models.TextField(max_length=100)
+    command = models.TextField(max_length=200)
     ouput = models.TextField(max_length=200)
     create_at = models.DateTimeField(auto_now=True)
     
