@@ -298,7 +298,7 @@ def configlog(request):
             "log" : data,
             'routerside': routerside 
         }
-        return render(request,'confglog.html', context)
+        return render(request,'configlog.html', context)
 
 def loginya(request):
     if request.method == 'POST':
