@@ -1,6 +1,8 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -20,4 +22,4 @@ urlpatterns = [
     path('delauto2/<int:id>',views.delauto2, name='delauto2url'),
     path('configlog',views.configlog, name='configlogurl')
     
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
