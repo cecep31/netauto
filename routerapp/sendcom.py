@@ -22,16 +22,16 @@ class Remote:
 
         return ssh
 
-    def scanip(self, host):
-        import networkscan
-        network = host+"/24"
-        # net = ipaddress.ip_network(network, strict=False)
-        myscan = networkscan.Networkscan(network)
-        myscan.run()
-        j = 0
-        for i in myscan.list_of_hosts_found:
-            j += 1
-        return j
+    # def scanip(self, host):
+    #     import networkscan
+    #     network = host+"/24"
+    #     # net = ipaddress.ip_network(network, strict=False)
+    #     myscan = networkscan.Networkscan(network)
+    #     myscan.run()
+    #     j = 0
+    #     for i in myscan.list_of_hosts_found:
+    #         j += 1
+    #     return j
 
     def autocon1(self):
 
